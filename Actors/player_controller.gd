@@ -13,5 +13,6 @@ func _physics_process(delta: float) -> void:
 		speed = 1200
 	if Input.is_action_just_released("speedUpHold") == true:
 		speed = 600
-
+	if Input.is_action_just_pressed("shoot") == true:
+		pass #just setting this up for later gonna make it pass for now 
 #
