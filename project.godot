@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="Project-Iron"
-run/main_scene="uid://7k2ic2y7146w"
+run/main_scene="uid://kpqmljsmcfrv"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://Actors/icon.svg"
+config/icon="res://Assets/icon.svg"
+
+[autoload]
+
+Global="*res://Globals/Global.gd"
+Debug="*res://Globals/Debug.gd"
 
 [input]
 
