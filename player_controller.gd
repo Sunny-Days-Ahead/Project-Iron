@@ -3,17 +3,13 @@ extends CharacterBody2D
 @export var speed : float
 @export var health = 3
 
-#movement handler
+#movement handler and dash
 func _physics_process(delta: float) -> void:
 	var direction = Input.get_vector("moveLeft","moveRight","moveUp","moveDown")
-	velocity = direction * speed 
+	velocity = direction * speed  
 	move_and_slide()
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	
+	if Input.is_action_pressed("speedUpHold") == true:
+		speed = 1200
+	if Input.is_action_just_released("speedUpHold") == true:
+		speed = 600
