@@ -28,6 +28,7 @@ shape = SubResource("RectangleShape2D_4sxok")
 debug_color = Color(0.915617, 0.26425827, 0.31216452, 0.41960785)
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 4
 script = ExtResource("4_451cp")
 health = NodePath("../HealthComponent")
 metadata/_custom_type_script = "uid://bc1bysnspv2xu"
