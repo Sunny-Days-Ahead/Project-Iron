@@ -38,3 +38,6 @@ func _input(event: InputEvent) -> void:
 		
 	if event.is_action_pressed("shoot") == true:
 		pass #just setting this up for later gonna make it pass for now 
+
+func _on_health_component_died() -> void:
+	print("Oh no I died!")
