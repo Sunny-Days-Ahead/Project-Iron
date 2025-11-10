@@ -9,7 +9,7 @@ const RES_GAMEBOY 	: Vector2 = Vector2(160, 144)
 const RES_480P 		: Vector2 = Vector2(640, 480)
 
 # Game specific settings
-const GAME_RES : Vector2 = Vector2(1152, 648)	## Change this to your game resolution
+const GAME_RES : Vector2 = Vector2(320,576)	## Change this to your game resolution
 const HALF_RES : Vector2 = GAME_RES * 0.5
 
 # Save/config paths
@@ -24,7 +24,7 @@ var player_node : CharacterBody2D
 var ui_node : Node
 
 # Window variables
-var scale_mult : int = 1			# How much the window should scale up @ runtime
+var scale_mult : int = 2			# How much the window should scale up @ runtime
 var window_size : Vector2i = Vector2i(GAME_RES * scale_mult)
 var screen_size : Vector2i = DisplayServer.screen_get_size()
 var window_pos : Vector2i = (screen_size - window_size) / 2

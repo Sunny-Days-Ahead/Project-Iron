@@ -1,19 +1,26 @@
 [gd_scene load_steps=3 format=3 uid="uid://7k2ic2y7146w"]
 
-[ext_resource type="PackedScene" uid="uid://bgny6g2pkkxll" path="res://Scenes/Actors/pirate_alpha.tscn" id="1_uj6h6"]
+[ext_resource type="Script" uid="uid://cukwu4avkqd54" path="res://Scenes/Levels/stage_1.gd" id="1_yr0dh"]
 
 [sub_resource type="Curve2D" id="Curve2D_yr0dh"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 171, 49, 0, 0, 0, 0, 27.124138, 25.745764, 0, 0, 0, 0, 62.50345, 6.228814)
+"points": PackedVector2Array(0, 0, 0, 0, 1, -32, 0, 0, 0, 0, 319, -33)
 }
-point_count = 3
+point_count = 2
 
 [node name="Stage1" type="Node2D"]
-position = Vector2(-1, 1)
+script = ExtResource("1_yr0dh")
 
-[node name="PirateAlpha" parent="." instance=ExtResource("1_uj6h6")]
-position = Vector2(354, 263)
-
-[node name="Path2D" type="Path2D" parent="."]
-scale = Vector2(1.6959064, 2.408163)
+[node name="PirateSpawner" type="Path2D" parent="."]
 curve = SubResource("Curve2D_yr0dh")
+
+[node name="pirate_spawn_1" type="Timer" parent="PirateSpawner"]
+wait_time = 5.0
+autostart = true
+
+[node name="PirateSpawnPoint" type="PathFollow2D" parent="PirateSpawner"]
+unique_name_in_owner = true
+position = Vector2(1, -32)
+rotation = -0.0031446437
+
+[connection signal="timeout" from="PirateSpawner/pirate_spawn_1" to="." method="_on_pirate_spawn_1_timeout"]

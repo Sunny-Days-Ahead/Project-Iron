@@ -20,6 +20,12 @@ config/icon="res://Assets/icon.svg"
 Global="*res://Globals/Global.gd"
 Debug="*res://Globals/Debug.gd"
 
+[display]
+
+window/size/viewport_width=320
+window/size/viewport_height=576
+window/stretch/scale_mode="integer"
+
 [input]
 
 ui_focus_next={
