@@ -1,3 +1,19 @@
-[gd_scene format=3 uid="uid://7k2ic2y7146w"]
+[gd_scene load_steps=3 format=3 uid="uid://7k2ic2y7146w"]
+
+[ext_resource type="PackedScene" uid="uid://bgny6g2pkkxll" path="res://Scenes/Actors/pirate_alpha.tscn" id="1_uj6h6"]
+
+[sub_resource type="Curve2D" id="Curve2D_yr0dh"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 171, 49, 0, 0, 0, 0, 27.124138, 25.745764, 0, 0, 0, 0, 62.50345, 6.228814)
+}
+point_count = 3
 
 [node name="Stage1" type="Node2D"]
+position = Vector2(-1, 1)
+
+[node name="PirateAlpha" parent="." instance=ExtResource("1_uj6h6")]
+position = Vector2(354, 263)
+
+[node name="Path2D" type="Path2D" parent="."]
+scale = Vector2(1.6959064, 2.408163)
+curve = SubResource("Curve2D_yr0dh")

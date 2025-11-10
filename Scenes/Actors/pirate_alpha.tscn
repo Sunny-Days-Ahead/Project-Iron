@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bgny6g2pkkxll"]
+
+[ext_resource type="Script" uid="uid://dh6isx61ji1wj" path="res://Scenes/Actors/pirate_alpha.gd" id="1_74yi4"]
+[ext_resource type="Texture2D" uid="uid://bpwh7tahta2s5" path="res://Assets/Enemies/Kla'ed - Scout - Base.png" id="2_g04a1"]
+
+[sub_resource type="Curve2D" id="Curve2D_rhnia"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 17, -52, 0, 0, 0, 0, 7.8461533, -19.569893, 0, 0, 0, 0, 10, -7, 0, 0, 0, 0, 1, 69)
+}
+point_count = 4
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g04a1"]
+size = Vector2(21.502266, 22.97331)
+
+[node name="PirateAlpha" type="Path2D"]
+curve = SubResource("Curve2D_rhnia")
+script = ExtResource("1_74yi4")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(17, -52)
+rotation = 1.845903
+
+[node name="Area2D" type="Area2D" parent="PathFollow2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/Area2D"]
+position = Vector2(-0.20783615, 2.1110916)
+shape = SubResource("RectangleShape2D_g04a1")
+
+[node name="Sprite2D" type="Sprite2D" parent="PathFollow2D"]
+rotation = 1.584759
+texture = ExtResource("2_g04a1")
