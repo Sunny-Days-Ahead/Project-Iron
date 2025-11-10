@@ -16,9 +16,12 @@ texture = ExtResource("2_p0ejf")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("3_kldaf")
+maxHealth = 1
 metadata/_custom_type_script = "uid://dr061mb2blql5"
 
 [node name="HitBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("4_4sxok")
 damage = 1
 metadata/_custom_type_script = "uid://bu0bec0jffl5o"
@@ -29,6 +32,7 @@ debug_color = Color(0.915617, 0.26425827, 0.31216452, 0.41960785)
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 collision_layer = 4
+collision_mask = 3
 script = ExtResource("4_451cp")
 health = NodePath("../HealthComponent")
 metadata/_custom_type_script = "uid://bc1bysnspv2xu"
@@ -36,3 +40,5 @@ metadata/_custom_type_script = "uid://bc1bysnspv2xu"
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("RectangleShape2D_4sxok")
 debug_color = Color(0.915617, 0.26425827, 0.31216452, 0.41960785)
+
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

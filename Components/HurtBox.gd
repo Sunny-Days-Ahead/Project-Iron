@@ -2,11 +2,13 @@
 class_name HurtBox
 extends Area2D
 
+#drag and drop in the healthcomponent or the HEART of the entity
 @export var health : HealthComponent
 
 func _ready() -> void:
 	area_entered.connect(_on_hit)
 	
+#did a hitbox touch me? noooooooooooo
 func _on_hit(area: Area2D) -> void:
 	if area is HitBox:
 		# We can use negative "damage" to heal

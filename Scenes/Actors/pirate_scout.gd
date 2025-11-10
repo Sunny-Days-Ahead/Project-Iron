@@ -3,3 +3,7 @@ func _ready() -> void:
 	global_rotation_degrees = 180
 func _process(delta: float) -> void:
 	global_position.y += 50 * delta
+
+
+func _on_health_component_died() -> void:
+	queue_free()
