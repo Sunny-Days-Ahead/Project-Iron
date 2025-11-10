@@ -37,7 +37,7 @@ func _input(event: InputEvent) -> void:
 		current_speed = speed
 		
 	if event.is_action_pressed("shoot") == true:
-		pass #just setting this up for later gonna make it pass for now 
+		%BulletSpawn.spawn()
 
 func _on_health_component_died() -> void:
 	print("Oh no I died!")

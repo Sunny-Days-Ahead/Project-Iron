@@ -11,6 +11,7 @@ const RES_480P 		: Vector2 = Vector2(640, 480)
 # Game specific settings
 const GAME_RES : Vector2 = Vector2(320,576)	## Change this to your game resolution
 const HALF_RES : Vector2 = GAME_RES * 0.5
+const OUT_OF_BOUNDS : Vector2 = Vector2(-999.0, -999.0)
 
 # Save/config paths
 const SAVE_DIR : String = "user://saves/"
