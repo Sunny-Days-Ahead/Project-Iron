@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://sc7cdfed8olm"]
+[gd_scene load_steps=6 format=3 uid="uid://sc7cdfed8olm"]
 
 [ext_resource type="Texture2D" uid="uid://cq5gpay6frarh" path="res://Assets/Player Assets/Player Ship Full HP.png" id="2_1p3rw"]
 [ext_resource type="Script" uid="uid://djvxgjtgk6qfl" path="res://Scenes/Actors/Player.gd" id="2_kne1u"]
+[ext_resource type="Script" uid="uid://dr061mb2blql5" path="res://Components/HealthComponent.gd" id="3_akrb1"]
+[ext_resource type="Script" uid="uid://bc1bysnspv2xu" path="res://Components/HurtBox.gd" id="4_26xe5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e80uo"]
 size = Vector2(135, 132)
@@ -12,8 +14,21 @@ script = ExtResource("2_kne1u")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_1p3rw")
 
-[node name="HurtBox" type="CollisionShape2D" parent="."]
+[node name="BodyShape" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_e80uo")
 debug_color = Color(0.93473625, 0.25693136, 0, 0.41960785)
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("3_akrb1")
+maxHealth = 3
+metadata/_custom_type_script = "uid://dr061mb2blql5"
+
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("4_26xe5")
+health = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://bc1bysnspv2xu"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HurtBox"]
+polygon = PackedVector2Array(0, -12, -4, -6, -4, -3, -14, 6, -14, 10, -4, 5, -2, 12, 2, 12, 4, 5, 14, 10, 14, 5, 5, -3, 5, -6)

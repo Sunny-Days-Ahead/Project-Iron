@@ -3,7 +3,6 @@ extends CharacterBody2D
 #export Vars
 @export var speed : float = 600.0
 @export var dash_speed : float = 1200.0
-@export_range(1, 10) var health : int = 4				# export_range limits the value in the editor
 
 # internal variables, not exported
 var current_speed : float = 0
@@ -39,7 +38,3 @@ func _input(event: InputEvent) -> void:
 		
 	if event.is_action_pressed("shoot") == true:
 		pass #just setting this up for later gonna make it pass for now 
-		
-func takeDamage(): #this function should change the sprite based on the amount of health
-	health -= 1 
-	#figure out how to change the texture based on amount of health that should be part of this function i think
