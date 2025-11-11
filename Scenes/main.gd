@@ -10,6 +10,8 @@ func _ready() -> void:
 	
 	# Start by loading Stage 1  (we will probably remove this later to start with nothing and load the main menu ui instead
 	change_stage("res://Scenes/Levels/Stage1.tscn")
+	
+	$SpeechLabel.start()
 
 func change_stage(new_stage_path : String) -> void:
 	# queue_free on all of the children inside of the Stage container
