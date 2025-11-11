@@ -24,6 +24,6 @@ position = Vector2(1, -32)
 rotation = -0.0031446437
 
 [node name="Pirateb" parent="PirateSpawner" instance=ExtResource("2_yr0dh")]
-position = Vector2(136, -83)
+position = Vector2(-79, -67)
 
 [connection signal="timeout" from="PirateSpawner/pirate_spawn_1" to="." method="_on_pirate_spawn_1_timeout"]
