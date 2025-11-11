@@ -16,7 +16,6 @@ script = ExtResource("1_yr0dh")
 curve = SubResource("Curve2D_yr0dh")
 
 [node name="pirate_spawn_1" type="Timer" parent="PirateSpawner"]
-wait_time = 5.0
 autostart = true
 
 [node name="PirateSpawnPoint" type="PathFollow2D" parent="PirateSpawner"]
@@ -25,5 +24,6 @@ position = Vector2(1, -32)
 rotation = -0.0031446437
 
 [node name="Pirateb" parent="PirateSpawner" instance=ExtResource("2_yr0dh")]
+position = Vector2(136, -83)
 
 [connection signal="timeout" from="PirateSpawner/pirate_spawn_1" to="." method="_on_pirate_spawn_1_timeout"]
