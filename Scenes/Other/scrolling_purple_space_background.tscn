@@ -9,7 +9,7 @@
 [node name="Background 1px" type="Parallax2D" parent="."]
 texture_filter = 1
 repeat_size = Vector2(0, 576)
-autoscroll = Vector2(0, 0.5)
+autoscroll = Vector2(0, 1.5)
 repeat_times = 5
 
 [node name="Sprite2D" type="Sprite2D" parent="Background 1px"]

@@ -5,7 +5,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_yr0dh"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1, -32, 0, 0, 0, 0, 319, -33)
+"points": PackedVector2Array(0, 0, 0, 0, 8, -32, 0, 0, 0, 0, 312, -32)
 }
 point_count = 2
 
@@ -20,8 +20,7 @@ autostart = true
 
 [node name="PirateSpawnPoint" type="PathFollow2D" parent="PirateSpawner"]
 unique_name_in_owner = true
-position = Vector2(1, -32)
-rotation = -0.0031446437
+position = Vector2(8, -32)
 
 [node name="Pirateb" parent="PirateSpawner" instance=ExtResource("2_yr0dh")]
 position = Vector2(136, -83)

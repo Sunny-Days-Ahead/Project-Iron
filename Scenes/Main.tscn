@@ -15,7 +15,7 @@ unique_name_in_owner = true
 
 [node name="Player" parent="." instance=ExtResource("2_kln2b")]
 unique_name_in_owner = true
-position = Vector2(157, 543)
+position = Vector2(161, 479)
 speed = 250.0
 dash_speed = 400.0
 

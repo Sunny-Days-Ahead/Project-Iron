@@ -23,7 +23,15 @@ Debug="*res://Globals/Debug.gd"
 [display]
 
 window/size/viewport_width=320
-window/size/viewport_height=576
+window/size/viewport_height=540
+window/size/resizable=false
+window/size/sharp_corners=true
+window/size/minimize_disabled=true
+window/size/maximize_disabled=true
+window/size/window_width_override=640
+window/size/window_height_override=1080
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_width"
 window/stretch/scale_mode="integer"
 
 [input]
@@ -73,3 +81,9 @@ speedUpHold={
 2d_physics/layer_2="Player Bullets"
 2d_physics/layer_3="Enemies"
 2d_physics/layer_4="Enemy Bullets"
+
+[rendering]
+
+textures/default_filters/anisotropic_filtering_level=0
+textures/decals/filter=0
+textures/light_projectors/filter=0
