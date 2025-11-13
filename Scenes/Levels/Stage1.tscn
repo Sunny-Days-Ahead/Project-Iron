@@ -23,6 +23,6 @@ unique_name_in_owner = true
 position = Vector2(8, -32)
 
 [node name="Pirateb" parent="PirateSpawner" instance=ExtResource("2_yr0dh")]
-position = Vector2(136, -83)
+position = Vector2(-79, -67)
 
 [connection signal="timeout" from="PirateSpawner/pirate_spawn_1" to="." method="_on_pirate_spawn_1_timeout"]

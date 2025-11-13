@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://kpqmljsmcfrv"]
+[gd_scene load_steps=6 format=3 uid="uid://kpqmljsmcfrv"]
 
 [ext_resource type="Script" uid="uid://dumngckmby8mo" path="res://Scenes/main.gd" id="1_kln2b"]
 [ext_resource type="PackedScene" uid="uid://sc7cdfed8olm" path="res://Scenes/Actors/Player.tscn" id="2_kln2b"]
 [ext_resource type="AudioStream" uid="uid://c2lekl8la7mny" path="res://Assets/SFX/click1.ogg" id="4_pbw6q"]
 [ext_resource type="PackedScene" uid="uid://cq1mihhdvy4ge" path="res://Scenes/Other/scrolling_purple_space_background.tscn" id="4_rgh2o"]
+[ext_resource type="Script" uid="uid://1qs36werbe8o" path="res://Scenes/score.gd" id="4_v1gob"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_kln2b")
@@ -21,6 +22,12 @@ dash_speed = 400.0
 
 [node name="UI" type="Node" parent="."]
 unique_name_in_owner = true
+
+[node name="Score" type="Label" parent="UI"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Stage:"
+script = ExtResource("4_v1gob")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_pbw6q")
