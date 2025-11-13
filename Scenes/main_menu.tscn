@@ -1,0 +1,58 @@
+[gd_scene load_steps=2 format=3 uid="uid://dleceicjkk6uc"]
+
+[ext_resource type="Script" uid="uid://drw0e0yysv28b" path="res://Scenes/main_menu.gd" id="1_28flt"]
+
+[node name="Main Menu" type="Node"]
+script = ExtResource("1_28flt")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -215.0
+offset_right = 35.0
+offset_bottom = -164.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+text = "PROJECT 
+  IRON"
+
+[node name="MMUI" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.0
+offset_right = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+
+[node name="marginC" type="MarginContainer" parent="MMUI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="vertiButtons" type="VBoxContainer" parent="MMUI/marginC"]
+layout_mode = 2
+
+[node name="Begin Mission" type="Button" parent="MMUI/marginC/vertiButtons"]
+layout_mode = 2
+text = "Begin Mission
+"
+
+[node name="Mission Briefing" type="Button" parent="MMUI/marginC/vertiButtons"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Mission Briefing"
+
+[node name="Button2" type="Button" parent="MMUI/marginC/vertiButtons"]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="toggled" from="MMUI/marginC/vertiButtons/Begin Mission" to="." method="_on_begin_mission_toggled"]
