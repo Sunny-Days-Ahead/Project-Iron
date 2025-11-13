@@ -65,5 +65,11 @@ func skip() -> void:
 
 func _on_character_timeout():
 	printNextChar()
-	typeSound.play()
+
+	if typeSound != null:
+		if typeSound.has_method("playJitter"):
+			typeSound.playJitter()
+		else:
+			typeSound.play()
+			
 	charPrinted.emit()

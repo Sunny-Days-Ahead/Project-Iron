@@ -38,6 +38,7 @@ func _input(event: InputEvent) -> void:
 		
 	if event.is_action_pressed("shoot") == true:
 		%BulletSpawn.spawn()
+		%LaserSFX.playJitter()
 
 func _on_health_component_died() -> void:
 	print("Oh no I died!")

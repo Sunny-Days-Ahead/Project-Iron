@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://sc7cdfed8olm"]
+[gd_scene load_steps=10 format=3 uid="uid://sc7cdfed8olm"]
 
 [ext_resource type="Texture2D" uid="uid://cq5gpay6frarh" path="res://Assets/Player Assets/Player Ship Full HP.png" id="2_1p3rw"]
 [ext_resource type="Script" uid="uid://djvxgjtgk6qfl" path="res://Scenes/Actors/Player.gd" id="2_kne1u"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://bc1bysnspv2xu" path="res://Components/HurtBox.gd" id="4_26xe5"]
 [ext_resource type="Script" uid="uid://dbgqt4twdptii" path="res://Components/Spawner.gd" id="5_4fuvf"]
 [ext_resource type="PackedScene" uid="uid://k6phmbhftrdq" path="res://Scenes/Projectiles/Bullet.tscn" id="6_6q7nd"]
+[ext_resource type="AudioStream" uid="uid://bpkl1ku3h8t1a" path="res://Assets/SFX/laserSmall_000.ogg" id="7_rplui"]
+[ext_resource type="Script" uid="uid://cv6wgnyjde582" path="res://Components/AudioJitterPlayer.gd" id="8_ut0tw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e80uo"]
 size = Vector2(135, 132)
@@ -44,5 +46,12 @@ script = ExtResource("5_4fuvf")
 sceneToSpawn = ExtResource("6_6q7nd")
 siblingOf = NodePath("..")
 metadata/_custom_type_script = "uid://dbgqt4twdptii"
+
+[node name="LaserSFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("7_rplui")
+script = ExtResource("8_ut0tw")
+jitter = 0.2
+metadata/_custom_type_script = "uid://cv6wgnyjde582"
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
