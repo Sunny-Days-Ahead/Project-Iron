@@ -6,7 +6,7 @@
 script = ExtResource("1_28flt")
 
 [node name="Label" type="Label" parent="."]
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -23,6 +23,7 @@ text = "PROJECT
 
 [node name="MMUI" type="Control" parent="."]
 layout_mode = 3
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -42,17 +43,21 @@ offset_bottom = 40.0
 layout_mode = 2
 
 [node name="Begin Mission" type="Button" parent="MMUI/marginC/vertiButtons"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Begin Mission
 "
 
 [node name="Mission Briefing" type="Button" parent="MMUI/marginC/vertiButtons"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Mission Briefing"
 
-[node name="Button2" type="Button" parent="MMUI/marginC/vertiButtons"]
+[node name="Exit" type="Button" parent="MMUI/marginC/vertiButtons"]
 layout_mode = 2
 text = "Exit"
 
-[connection signal="toggled" from="MMUI/marginC/vertiButtons/Begin Mission" to="." method="_on_begin_mission_toggled"]
+[connection signal="pressed" from="MMUI/marginC/vertiButtons/Begin Mission" to="." method="_on_begin_mission_pressed"]
+[connection signal="pressed" from="MMUI/marginC/vertiButtons/Mission Briefing" to="." method="_on_mission_briefing_pressed"]
+[connection signal="pressed" from="MMUI/marginC/vertiButtons/Exit" to="." method="_on_exit_pressed"]

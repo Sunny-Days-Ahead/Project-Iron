@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://kpqmljsmcfrv"]
+[gd_scene load_steps=6 format=3 uid="uid://kpqmljsmcfrv"]
 
 [ext_resource type="Script" uid="uid://dumngckmby8mo" path="res://Scenes/main.gd" id="1_kln2b"]
 [ext_resource type="PackedScene" uid="uid://sc7cdfed8olm" path="res://Scenes/Actors/Player.tscn" id="2_kln2b"]
 [ext_resource type="PackedScene" uid="uid://cq1mihhdvy4ge" path="res://Scenes/Other/scrolling_purple_space_background.tscn" id="4_rgh2o"]
 [ext_resource type="Script" uid="uid://1qs36werbe8o" path="res://Scenes/score.gd" id="4_v1gob"]
+[ext_resource type="PackedScene" uid="uid://dleceicjkk6uc" path="res://Scenes/main_menu.tscn" id="5_pbw6q"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_kln2b")
@@ -15,6 +16,7 @@ unique_name_in_owner = true
 
 [node name="Player" parent="." instance=ExtResource("2_kln2b")]
 unique_name_in_owner = true
+visible = false
 position = Vector2(161, 479)
 speed = 250.0
 dash_speed = 400.0
@@ -23,7 +25,14 @@ dash_speed = 400.0
 unique_name_in_owner = true
 
 [node name="Score" type="Label" parent="UI"]
+visible = false
 offset_right = 47.0
 offset_bottom = 23.0
 text = "Score:"
 script = ExtResource("4_v1gob")
+
+[node name="Main Menu" parent="UI" instance=ExtResource("5_pbw6q")]
+unique_name_in_owner = true
+
+[connection signal="startGame" from="UI/Main Menu" to="." method="_on_main_menu_start_game"]
+[connection signal="startMissionBrief" from="UI/Main Menu" to="." method="_on_main_menu_start_mission_brief"]

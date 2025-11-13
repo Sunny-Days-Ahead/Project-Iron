@@ -7,9 +7,6 @@ func _ready() -> void:
 	Global.stage_node = %Stage
 	Global.player_node = %Player
 	Global.ui_node = %UI
-	
-	# Start by loading Stage 1  (we will probably remove this later to start with nothing and load the main menu ui instead
-	change_stage("res://Scenes/Levels/Stage1.tscn")
 
 func change_stage(new_stage_path : String) -> void:
 	# queue_free on all of the children inside of the Stage container
@@ -21,12 +18,11 @@ func change_stage(new_stage_path : String) -> void:
 	var current_scene = loaded_scene.instantiate()
 	Global.stage_node.add_child(current_scene)
 
-func set_ui(new_ui_path : String) -> void:
-	# queue_free on all children inside of the UI container
-	for child in Global.ui_node.get_children():
-		child.queue_free()
-		
-	# Load the scene, instantiate it, then add it to the UI container
-	var loaded_scene = ResourceLoader.load(new_ui_path)
-	var current_scene = loaded_scene.instantiate()
-	Global.ui_node.add_child(current_scene)
+func _on_main_menu_start_game() -> void:
+	%"Main Menu".queue_free()
+	change_stage("res://Scenes/Levels/Stage1.tscn")
+	$UI/Score.visible = true
+	%Player.visible = true
+
+func _on_main_menu_start_mission_brief() -> void:
+	pass
