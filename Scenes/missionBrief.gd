@@ -1,5 +1,5 @@
 extends Node
-
+signal briefover
 
 # Called when the node enters the scene tree for the first time.
 func missionbrief() -> void:
@@ -42,4 +42,9 @@ func _on_commander_5_finished() -> void:
 func _on_speech_time_5_timeout() -> void:
 	%Commander5.queue_free()
 	%CommandPortrait.hide()
+	briefover.emit()
 	
+
+
+func _on_main_brief_start() -> void:
+	missionbrief()

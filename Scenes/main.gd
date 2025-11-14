@@ -1,9 +1,10 @@
 extends Node
-signal briefOver
+signal briefStart
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$"UI/Mission Briefing".queue_free()
+	%CommandPortrait.visible = false
 	Global.main_node = $"."
 	Global.stage_node = %Stage
 	Global.player_node = %Player
@@ -20,20 +21,22 @@ func change_stage(new_stage_path : String) -> void:
 	Global.stage_node.add_child(current_scene)
 
 func _on_main_menu_start_game() -> void:
-	%"Main Menu".queue_free()
+	%"Main Menu"/MMUI.hide()
 	change_stage("res://Scenes/Levels/Stage1.tscn")
 	$UI/Score.visible = true
 	%Player.visible = true
 
 func _on_main_menu_start_mission_brief() -> void:
-	%"Main Menu".queue_free()
-	change_stage("res://Mission Brief.tscn")
-	briefOver.emit()
-
-
-func _on_brief_over() -> void:
-	$Timer.start()
+	%"Main Menu"/MMUI.hide()
+	%CommandPortrait.show()
+	briefStart.emit()
+	%"Mission Briefing".hide()
 
 
 func _on_timer_timeout() -> void:
+	
 	change_stage("res://Scenes/main_menu.tscn")
+
+
+func _on_mission_brief_briefover() -> void:
+	%"Main Menu"/MMUI.show()
