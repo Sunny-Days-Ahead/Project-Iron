@@ -1,0 +1,125 @@
+[gd_scene load_steps=6 format=3 uid="uid://bntkcrray1thv"]
+
+[ext_resource type="Texture2D" uid="uid://b7ommsejp8j8u" path="res://Assets/portrait/Commander_Portrait.png" id="1_7qr34"]
+[ext_resource type="Script" uid="uid://c7p3tyk41m3ni" path="res://mission_brief.gd" id="1_tdvel"]
+[ext_resource type="Script" uid="uid://cjk407wahqfjv" path="res://Components/SpeechLabel.gd" id="2_tdvel"]
+[ext_resource type="AudioStream" uid="uid://c2lekl8la7mny" path="res://Assets/SFX/click1.ogg" id="4_cvy3j"]
+[ext_resource type="Script" uid="uid://cv6wgnyjde582" path="res://Components/AudioJitterPlayer.gd" id="5_e46w1"]
+
+[node name="Mission Briefing" type="Node"]
+script = ExtResource("1_tdvel")
+
+[node name="CommandPortrait" type="TextureRect" parent="."]
+unique_name_in_owner = true
+offset_top = 446.99997
+offset_right = 1024.0
+offset_bottom = 1471.0
+scale = Vector2(0.09, 0.09)
+size_flags_horizontal = 0
+texture = ExtResource("1_7qr34")
+
+[node name="Commander1" type="Label" parent="." node_paths=PackedStringArray("typeSound")]
+unique_name_in_owner = true
+offset_left = 93.0
+offset_top = 451.0
+offset_right = 133.0
+offset_bottom = 474.0
+script = ExtResource("2_tdvel")
+dialogue = "Thank you for coming Ace
+Your next mission is of the 
+highest import"
+typeSound = NodePath("../AudioJitterPlayer")
+metadata/_custom_type_script = "uid://cjk407wahqfjv"
+
+[node name="Commander2" type="Label" parent="." node_paths=PackedStringArray("typeSound")]
+unique_name_in_owner = true
+offset_left = 93.0
+offset_top = 451.0
+offset_right = 133.0
+offset_bottom = 474.0
+script = ExtResource("2_tdvel")
+dialogue = "We've just recieved intel
+that the insurgents are
+transporting a PK weapon"
+typeSound = NodePath("../AudioJitterPlayer")
+metadata/_custom_type_script = "uid://cjk407wahqfjv"
+
+[node name="Commander3" type="Label" parent="." node_paths=PackedStringArray("typeSound")]
+unique_name_in_owner = true
+offset_left = 93.0
+offset_top = 451.0
+offset_right = 133.0
+offset_bottom = 474.0
+script = ExtResource("2_tdvel")
+dialogue = "Your mission is simple.
+You are to eliminate as
+much of the convoy as"
+typeSound = NodePath("../AudioJitterPlayer")
+metadata/_custom_type_script = "uid://cjk407wahqfjv"
+
+[node name="Commander4" type="Label" parent="." node_paths=PackedStringArray("typeSound")]
+unique_name_in_owner = true
+offset_left = 93.0
+offset_top = 451.0
+offset_right = 133.0
+offset_bottom = 474.0
+script = ExtResource("2_tdvel")
+dialogue = "possible and neutralize
+the super freighter carrying
+the planet killer weapon."
+typeSound = NodePath("../AudioJitterPlayer")
+metadata/_custom_type_script = "uid://cjk407wahqfjv"
+
+[node name="Commander5" type="Label" parent="." node_paths=PackedStringArray("typeSound")]
+unique_name_in_owner = true
+offset_left = 93.0
+offset_top = 451.0
+offset_right = 133.0
+offset_bottom = 474.0
+script = ExtResource("2_tdvel")
+dialogue = "Good Luck Ace!!!
+the Federation of Old Earth
+is counting on you!!!"
+typeSound = NodePath("../AudioJitterPlayer")
+metadata/_custom_type_script = "uid://cjk407wahqfjv"
+
+[node name="AudioJitterPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_cvy3j")
+script = ExtResource("5_e46w1")
+metadata/_custom_type_script = "uid://cv6wgnyjde582"
+
+[node name="SpeechTime1" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 5.0
+one_shot = true
+
+[node name="SpeechTime2" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 5.0
+one_shot = true
+
+[node name="SpeechTime3" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 5.0
+one_shot = true
+
+[node name="SpeechTime4" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 5.0
+one_shot = true
+
+[node name="SpeechTime5" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 5.0
+one_shot = true
+
+[connection signal="finished" from="Commander1" to="." method="_on_commander_1_finished"]
+[connection signal="finished" from="Commander2" to="." method="_on_commander_2_finished"]
+[connection signal="finished" from="Commander3" to="." method="_on_commander_3_finished"]
+[connection signal="finished" from="Commander4" to="." method="_on_commander_4_finished"]
+[connection signal="finished" from="Commander5" to="." method="_on_commander_5_finished"]
+[connection signal="timeout" from="SpeechTime1" to="." method="_on_speech_time_1_timeout"]
+[connection signal="timeout" from="SpeechTime2" to="." method="_on_speech_time_2_timeout"]
+[connection signal="timeout" from="SpeechTime3" to="." method="_on_speech_time_3_timeout"]
+[connection signal="timeout" from="SpeechTime4" to="." method="_on_speech_time_4_timeout"]
+[connection signal="timeout" from="SpeechTime5" to="." method="_on_speech_time_5_timeout"]
