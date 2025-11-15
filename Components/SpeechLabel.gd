@@ -16,6 +16,8 @@ extends Label
 signal finished				# Emits when the whole dialogue is finished
 signal charPrinted			# Emits when one or more characters got typed
 
+var isPlaying : bool = false
+
 var _timer : Timer = Timer.new()
 var _nextChar : int = 0
 
@@ -40,9 +42,11 @@ func start() -> void:
 	if dialogue.length() > 0:
 		# Length will be 0 on an empty string, and that would break the other scripts, so handle that here.
 		_timer.start()
+		isPlaying = true
 	else:
 		# Running an empty dialogue means we instantly finish.
 		finished.emit()
+		isPlaying = false
 
 func printNextChar():
 	if _nextChar < dialogue.length():
@@ -53,6 +57,7 @@ func printNextChar():
 		# Otherwise, we're out of things to print!
 		_timer.stop()
 		finished.emit()
+		isPlaying = false
 	
 func skip() -> void:
 	_timer.stop()
@@ -62,6 +67,7 @@ func skip() -> void:
 	
 	charPrinted.emit()
 	finished.emit()
+	isPlaying = false
 
 func _on_character_timeout():
 	printNextChar()

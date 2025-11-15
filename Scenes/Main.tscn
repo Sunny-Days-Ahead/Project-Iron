@@ -39,9 +39,10 @@ offset_bottom = 23.0
 text = "Score:"
 script = ExtResource("4_v1gob")
 
-[node name="mission brief" type="Node" parent="UI"]
+[node name="mission brief" type="Node" parent="UI" node_paths=PackedStringArray("speechList")]
 unique_name_in_owner = true
 script = ExtResource("6_bmxlf")
+speechList = [NodePath("Commander1"), NodePath("Commander2"), NodePath("Commander3"), NodePath("Commander4"), NodePath("Commander5")]
 
 [node name="CommandPortrait" type="TextureRect" parent="UI/mission brief"]
 unique_name_in_owner = true
@@ -52,7 +53,7 @@ scale = Vector2(0.09, 0.09)
 size_flags_horizontal = 0
 texture = ExtResource("7_4kpch")
 
-[node name="Commander1" type="Label" parent="UI/mission brief"]
+[node name="Commander1" type="Label" parent="UI/mission brief" node_paths=PackedStringArray("typeSound")]
 unique_name_in_owner = true
 offset_left = 93.0
 offset_top = 451.0
@@ -62,9 +63,10 @@ script = ExtResource("8_grg3l")
 dialogue = "Thank you for coming Ace
 Your next mission is of the 
 highest import"
+typeSound = NodePath("../AudioJitterPlayer")
 metadata/_custom_type_script = "uid://cjk407wahqfjv"
 
-[node name="Commander2" type="Label" parent="UI/mission brief"]
+[node name="Commander2" type="Label" parent="UI/mission brief" node_paths=PackedStringArray("typeSound")]
 unique_name_in_owner = true
 offset_left = 93.0
 offset_top = 451.0
@@ -74,9 +76,10 @@ script = ExtResource("8_grg3l")
 dialogue = "We've just recieved intel
 that the insurgents are
 transporting a PK weapon"
+typeSound = NodePath("../AudioJitterPlayer")
 metadata/_custom_type_script = "uid://cjk407wahqfjv"
 
-[node name="Commander3" type="Label" parent="UI/mission brief"]
+[node name="Commander3" type="Label" parent="UI/mission brief" node_paths=PackedStringArray("typeSound")]
 unique_name_in_owner = true
 offset_left = 93.0
 offset_top = 451.0
@@ -86,9 +89,10 @@ script = ExtResource("8_grg3l")
 dialogue = "Your mission is simple.
 You are to eliminate as
 much of the convoy as"
+typeSound = NodePath("../AudioJitterPlayer")
 metadata/_custom_type_script = "uid://cjk407wahqfjv"
 
-[node name="Commander4" type="Label" parent="UI/mission brief"]
+[node name="Commander4" type="Label" parent="UI/mission brief" node_paths=PackedStringArray("typeSound")]
 unique_name_in_owner = true
 offset_left = 93.0
 offset_top = 451.0
@@ -98,9 +102,10 @@ script = ExtResource("8_grg3l")
 dialogue = "possible and neutralize
 the super freighter carrying
 the planet killer weapon."
+typeSound = NodePath("../AudioJitterPlayer")
 metadata/_custom_type_script = "uid://cjk407wahqfjv"
 
-[node name="Commander5" type="Label" parent="UI/mission brief"]
+[node name="Commander5" type="Label" parent="UI/mission brief" node_paths=PackedStringArray("typeSound")]
 unique_name_in_owner = true
 offset_left = 93.0
 offset_top = 451.0
@@ -110,6 +115,7 @@ script = ExtResource("8_grg3l")
 dialogue = "Good Luck Ace!!!
 the Federation of Old Earth
 is counting on you!!!"
+typeSound = NodePath("../AudioJitterPlayer")
 metadata/_custom_type_script = "uid://cjk407wahqfjv"
 
 [node name="AudioJitterPlayer" type="AudioStreamPlayer" parent="UI/mission brief"]
@@ -117,27 +123,7 @@ stream = ExtResource("9_frkhe")
 script = ExtResource("10_1p5hy")
 metadata/_custom_type_script = "uid://cv6wgnyjde582"
 
-[node name="SpeechTime1" type="Timer" parent="UI/mission brief"]
-unique_name_in_owner = true
-wait_time = 5.0
-one_shot = true
-
-[node name="SpeechTime2" type="Timer" parent="UI/mission brief"]
-unique_name_in_owner = true
-wait_time = 5.0
-one_shot = true
-
-[node name="SpeechTime3" type="Timer" parent="UI/mission brief"]
-unique_name_in_owner = true
-wait_time = 5.0
-one_shot = true
-
-[node name="SpeechTime4" type="Timer" parent="UI/mission brief"]
-unique_name_in_owner = true
-wait_time = 5.0
-one_shot = true
-
-[node name="SpeechTime5" type="Timer" parent="UI/mission brief"]
+[node name="SpeechTimer" type="Timer" parent="UI/mission brief"]
 unique_name_in_owner = true
 wait_time = 5.0
 one_shot = true
@@ -203,16 +189,12 @@ text = "Exit"
 [connection signal="briefStart" from="." to="UI/mission brief" method="_on_main_brief_start"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="briefover" from="UI/mission brief" to="." method="_on_mission_brief_briefover"]
-[connection signal="finished" from="UI/mission brief/Commander1" to="UI/mission brief" method="_on_commander_1_finished"]
-[connection signal="finished" from="UI/mission brief/Commander2" to="UI/mission brief" method="_on_commander_2_finished"]
-[connection signal="finished" from="UI/mission brief/Commander3" to="UI/mission brief" method="_on_commander_3_finished"]
-[connection signal="finished" from="UI/mission brief/Commander4" to="UI/mission brief" method="_on_commander_4_finished"]
-[connection signal="finished" from="UI/mission brief/Commander5" to="UI/mission brief" method="_on_commander_5_finished"]
-[connection signal="timeout" from="UI/mission brief/SpeechTime1" to="UI/mission brief" method="_on_speech_time_1_timeout"]
-[connection signal="timeout" from="UI/mission brief/SpeechTime2" to="UI/mission brief" method="_on_speech_time_2_timeout"]
-[connection signal="timeout" from="UI/mission brief/SpeechTime3" to="UI/mission brief" method="_on_speech_time_3_timeout"]
-[connection signal="timeout" from="UI/mission brief/SpeechTime4" to="UI/mission brief" method="_on_speech_time_4_timeout"]
-[connection signal="timeout" from="UI/mission brief/SpeechTime5" to="UI/mission brief" method="_on_speech_time_5_timeout"]
+[connection signal="finished" from="UI/mission brief/Commander1" to="UI/mission brief" method="_on_speech_finished"]
+[connection signal="finished" from="UI/mission brief/Commander2" to="UI/mission brief" method="_on_speech_finished"]
+[connection signal="finished" from="UI/mission brief/Commander3" to="UI/mission brief" method="_on_speech_finished"]
+[connection signal="finished" from="UI/mission brief/Commander4" to="UI/mission brief" method="_on_speech_finished"]
+[connection signal="finished" from="UI/mission brief/Commander5" to="UI/mission brief" method="_on_speech_finished"]
+[connection signal="timeout" from="UI/mission brief/SpeechTimer" to="UI/mission brief" method="_on_speech_timer_timeout"]
 [connection signal="startGame" from="UI/Main Menu" to="." method="_on_main_menu_start_game"]
 [connection signal="startMissionBrief" from="UI/Main Menu" to="." method="_on_main_menu_start_mission_brief"]
 [connection signal="pressed" from="UI/Main Menu/MMUI/marginC/vertiButtons/Mission Briefing" to="UI/Main Menu" method="_on_mission_briefing_pressed"]

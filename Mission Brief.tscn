@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bntkcrray1thv"]
-
-[ext_resource type="Script" path="res://mission_brief.gd" id="1_tdvel"]
-
-[node name="Mission Briefing" type="Node"]
-script = ExtResource("1_tdvel")
