@@ -23,6 +23,7 @@ func change_stage(new_stage_path : String) -> void:
 func _on_main_menu_start_game() -> void:
 	%"Main Menu"/MMUI.hide()
 	change_stage("res://Scenes/Levels/Stage1.tscn")
+	Global.stage_node.currentStage = 1 
 	$UI/Score.visible = true
 	%Player.visible = true
 
@@ -40,3 +41,16 @@ func _on_timer_timeout() -> void:
 
 func _on_mission_brief_briefover() -> void:
 	%"Main Menu"/MMUI.show()
+
+
+func _on_player_player_death() -> void:
+	get_tree().paused = true 
+	%GOUI.show()
+	
+
+func _on_restart_pressed() -> void:
+	if %Stage.currentStage == 1:
+			change_stage("res://Scenes/Levels/Stage1.tscn")
+			%GOUI.hide()
+			get_tree().paused = false
+			

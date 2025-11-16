@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://kpqmljsmcfrv"]
+[gd_scene load_steps=12 format=3 uid="uid://kpqmljsmcfrv"]
 
 [ext_resource type="Script" uid="uid://dumngckmby8mo" path="res://Scenes/main.gd" id="1_kln2b"]
 [ext_resource type="PackedScene" uid="uid://sc7cdfed8olm" path="res://Scenes/Actors/Player.tscn" id="2_kln2b"]
+[ext_resource type="Script" uid="uid://cfywxakmer1g3" path="res://Scenes/stagecontroller.gd" id="3_4kpch"]
 [ext_resource type="PackedScene" uid="uid://cq1mihhdvy4ge" path="res://Scenes/Other/scrolling_purple_space_background.tscn" id="4_rgh2o"]
 [ext_resource type="Script" uid="uid://1qs36werbe8o" path="res://Scenes/score.gd" id="4_v1gob"]
 [ext_resource type="Script" uid="uid://bf2ffg6vdvqya" path="res://Scenes/missionBrief.gd" id="6_bmxlf"]
@@ -21,6 +22,7 @@ wait_time = 62.0
 
 [node name="Stage" type="Node" parent="."]
 unique_name_in_owner = true
+script = ExtResource("3_4kpch")
 
 [node name="Player" parent="." instance=ExtResource("2_kln2b")]
 unique_name_in_owner = true
@@ -186,8 +188,48 @@ text = "Begin Mission
 layout_mode = 2
 text = "Exit"
 
+[node name="Game Over" type="Node" parent="UI"]
+
+[node name="GOUI" type="Control" parent="UI/Game Over"]
+unique_name_in_owner = true
+process_mode = 2
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ScreenDim" type="ColorRect" parent="UI/Game Over/GOUI"]
+layout_mode = 0
+offset_right = 323.0
+offset_bottom = 545.0
+color = Color(0.1494745, 0.14947453, 0.14947447, 0.75686276)
+
+[node name="GOContainer" type="VBoxContainer" parent="UI/Game Over/GOUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 96.5
+offset_top = 238.5
+offset_right = 183.5
+offset_bottom = 296.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOver" type="Label" parent="UI/Game Over/GOUI/GOContainer"]
+layout_mode = 2
+text = "Game Over"
+
+[node name="Restart" type="Button" parent="UI/Game Over/GOUI/GOContainer"]
+layout_mode = 2
+text = "Restart"
+
 [connection signal="briefStart" from="." to="UI/mission brief" method="_on_main_brief_start"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="PlayerDeath" from="Player" to="." method="_on_player_player_death"]
 [connection signal="briefover" from="UI/mission brief" to="." method="_on_mission_brief_briefover"]
 [connection signal="finished" from="UI/mission brief/Commander1" to="UI/mission brief" method="_on_speech_finished"]
 [connection signal="finished" from="UI/mission brief/Commander2" to="UI/mission brief" method="_on_speech_finished"]
@@ -200,3 +242,4 @@ text = "Exit"
 [connection signal="pressed" from="UI/Main Menu/MMUI/marginC/vertiButtons/Mission Briefing" to="UI/Main Menu" method="_on_mission_briefing_pressed"]
 [connection signal="pressed" from="UI/Main Menu/MMUI/marginC/vertiButtons/Begin Mission" to="UI/Main Menu" method="_on_begin_mission_pressed"]
 [connection signal="pressed" from="UI/Main Menu/MMUI/marginC/vertiButtons/Exit" to="UI/Main Menu" method="_on_exit_pressed"]
+[connection signal="pressed" from="UI/Game Over/GOUI/GOContainer/Restart" to="." method="_on_restart_pressed"]

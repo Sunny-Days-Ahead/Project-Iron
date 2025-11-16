@@ -4,6 +4,8 @@ extends CharacterBody2D
 @export var speed : float = 600.0
 @export var dash_speed : float = 1200.0
 
+signal PlayerDeath
+
 # internal variables, not exported
 var current_speed : float = 0
 var direction : Vector2 = Vector2.ZERO
@@ -16,6 +18,11 @@ func _ready() -> void:
 	# If we forgot to set the dash speed export, this is the fallback
 	if (dash_speed == 0):
 		dash_speed = speed * 2
+		
+	# initialize the HealthComponent
+	%HealthComponent.fullHeal()
+	
+	global_position = Vector2(161,479)
 
 # _physics_process is where we put stuff that uses godot's physics system (it runs many times per frame).
 func _physics_process(_delta: float) -> void:
@@ -41,4 +48,5 @@ func _input(event: InputEvent) -> void:
 		%LaserSFX.playJitter()
 
 func _on_health_component_died() -> void:
-	print("Oh no I died!")
+	PlayerDeath.emit()
+	#print("Oh no i emitted a signal")
