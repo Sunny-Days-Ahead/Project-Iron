@@ -8,10 +8,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	global_position.y -= delta * 200
+	global_position.y += delta * 200
 	anim.animation = "Shoot"
 	anim.play()
-	
+	global_rotation_degrees = 180
 
 
 func _on_timer_timeout() -> void:
