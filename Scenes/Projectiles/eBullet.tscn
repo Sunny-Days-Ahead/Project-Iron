@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://dxe1bgbj8t1v3"]
 
-[ext_resource type="Script" uid="uid://b8ccbgeqcb213" path="res://Scenes/Projectiles/bullet.gd" id="1_w2k8u"]
+[ext_resource type="Script" uid="uid://b10i407o55fc2" path="res://Scenes/Projectiles/ebullet.gd" id="1_w2k8u"]
 [ext_resource type="Texture2D" uid="uid://dm63hodewdrcp" path="res://Assets/Weapons/Main ship weapon - Projectile - Auto cannon bullet.png" id="2_riptf"]
 [ext_resource type="Script" uid="uid://bu0bec0jffl5o" path="res://Components/HitBox.gd" id="3_bewh0"]
 
@@ -43,7 +43,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3pu08"]
 size = Vector2(12, 14)
 
-[node name="Bullet" type="Node2D" node_paths=PackedStringArray("anim")]
+[node name="eBullet" type="Node2D" node_paths=PackedStringArray("anim")]
+top_level = true
 script = ExtResource("1_w2k8u")
 anim = NodePath("AnimatedSprite2D")
 

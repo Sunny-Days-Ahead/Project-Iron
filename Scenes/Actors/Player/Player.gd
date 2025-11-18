@@ -6,7 +6,6 @@ extends CharacterBody2D
 
 signal PlayerDeath
 
-# internal variables, not exported
 var current_speed : float = 0
 var direction : Vector2 = Vector2.ZERO
 
@@ -33,6 +32,10 @@ func _physics_process(_delta: float) -> void:
 # Held inputs are good here, enemy logic, spawning things, etc.
 func _process(_delta: float) -> void:
 	direction = Input.get_vector("moveLeft", "moveRight", "moveUp", "moveDown")
+	
+	if Input.is_action_pressed("shoot") == true:
+		%BulletSpawn.try_spawn()
+		%LaserSFX.playJitter()
 
 # _input is run whenever we press or release a button.
 # Good for rising and falling edge stuff, not so good for held buttons or joysticks (that's why I put that in process)
@@ -42,10 +45,6 @@ func _input(event: InputEvent) -> void:
 		
 	if event.is_action_released("speedUpHold") == true:
 		current_speed = speed
-		
-	if event.is_action_pressed("shoot") == true:
-		%BulletSpawn.spawn()
-		%LaserSFX.playJitter()
 
 func _on_health_component_died() -> void:
 	PlayerDeath.emit()

@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://bgny6g2pkkxll"]
 
-[ext_resource type="Script" uid="uid://dh6isx61ji1wj" path="res://Scenes/Actors/pirate_alpha.gd" id="1_74yi4"]
+[ext_resource type="Script" uid="uid://dh6isx61ji1wj" path="res://Scenes/Actors/PirateAlpha/pirate_alpha.gd" id="1_74yi4"]
 [ext_resource type="Texture2D" uid="uid://u080gu3axudh" path="res://Assets/Enemies/Kla'ed - Fighter - Base.png" id="2_74yi4"]
 [ext_resource type="Script" uid="uid://dr061mb2blql5" path="res://Components/HealthComponent.gd" id="3_y16ob"]
 [ext_resource type="Script" uid="uid://bu0bec0jffl5o" path="res://Components/HitBox.gd" id="4_8q80b"]
@@ -10,9 +10,9 @@
 
 [sub_resource type="Curve2D" id="Curve2D_rhnia"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -24, 128, 0, 0, 0, 0, 88, 128, 0, 0, 0, 0, 192, 128, 0, 0, 0, 0, 344, 128)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 400, 0)
 }
-point_count = 4
+point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7o5yl"]
 size = Vector2(18, 18)
@@ -25,45 +25,52 @@ script = ExtResource("1_74yi4")
 
 [node name="PirateAlpha" type="PathFollow2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-24, 128)
 
 [node name="Sprite2D" type="Sprite2D" parent="PirateAlpha"]
-rotation = 1.584759
+rotation = 1.5707964
 texture = ExtResource("2_74yi4")
 
-[node name="HealthComponent" type="Node" parent="."]
-script = ExtResource("3_y16ob")
-maxHealth = 1
-metadata/_custom_type_script = "uid://dr061mb2blql5"
-
-[node name="HitBox" type="Area2D" parent="."]
+[node name="HitBox" type="Area2D" parent="PirateAlpha/Sprite2D"]
+visible = false
+rotation = 1.5707964
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("4_8q80b")
 damage = 1
 metadata/_custom_type_script = "uid://bu0bec0jffl5o"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(-23, 129)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PirateAlpha/Sprite2D/HitBox"]
+visible = false
 shape = SubResource("RectangleShape2D_7o5yl")
 
-[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+[node name="HurtBox" type="Area2D" parent="PirateAlpha/Sprite2D" node_paths=PackedStringArray("health")]
+visible = false
+rotation = 1.5707964
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("5_0pqlq")
 health = NodePath("../HealthComponent")
 metadata/_custom_type_script = "uid://bc1bysnspv2xu"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(-24, 128)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PirateAlpha/Sprite2D/HurtBox"]
+visible = false
 shape = SubResource("RectangleShape2D_jreee")
 debug_color = Color(0.85425967, 0.34269592, 0.36912748, 0.41960785)
 
-[node name="Spawner" type="Timer" parent="." node_paths=PackedStringArray("siblingOf")]
-wait_time = 3.0
+[node name="Spawner" type="Timer" parent="PirateAlpha/Sprite2D" node_paths=PackedStringArray("spawnPosition")]
+autostart = true
 script = ExtResource("6_0pqlq")
 sceneToSpawn = ExtResource("7_7o5yl")
-siblingOf = NodePath("../PirateAlpha")
-spawnAngle = 180.0
+spawnPosition = NodePath("../BulletSpawnPosition")
 autoSpawn = true
 metadata/_custom_type_script = "uid://dbgqt4twdptii"
+
+[node name="HealthComponent" type="Node" parent="PirateAlpha/Sprite2D"]
+script = ExtResource("3_y16ob")
+maxHealth = 1
+metadata/_custom_type_script = "uid://dr061mb2blql5"
+
+[node name="BulletSpawnPosition" type="Marker2D" parent="PirateAlpha/Sprite2D"]
+position = Vector2(12, -5.2453663e-07)
+
+[connection signal="died" from="PirateAlpha/Sprite2D/HealthComponent" to="." method="_on_health_component_died"]

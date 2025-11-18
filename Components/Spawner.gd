@@ -2,10 +2,16 @@
 class_name Spawner
 extends Timer
 
+## Emitted when the scene is spawned. Entity contains a reference to the node spawned.
+signal spawned(entity : Node)
+
+## Scene to Spawn
 @export var sceneToSpawn : PackedScene
-@export var siblingOf : Node2D
-@export var spawnPosition : Vector2 = Global.OUT_OF_BOUNDS
-@export var spawnAngle : float = 0.0
+
+## Scene will be spawned as a child of this Marker2D
+@export var spawnPosition : Marker2D
+
+## When true, spawns automatically when timer complete.
 @export var autoSpawn : bool
 
 var canSpawn : bool = true
@@ -23,16 +29,16 @@ func _on_spawner_timeout() -> void:
 	if autoSpawn:
 		spawn()
 
+func try_spawn() -> void:
+	if canSpawn:
+		spawn()
+
 func spawn() -> void:
 	var newEntity = sceneToSpawn.instantiate()
 	
-	newEntity.global_rotation_degrees = spawnAngle
+	newEntity.global_position = spawnPosition.global_position
+	spawnPosition.add_child(newEntity)
+	spawned.emit(newEntity)
 	
-	if spawnPosition != Global.OUT_OF_BOUNDS:
-		newEntity.global_position = spawnPosition
-	else:
-		newEntity.global_position = siblingOf.global_position
-	
-	siblingOf.get_parent().add_child(newEntity)
-
 	canSpawn = false
+	start()

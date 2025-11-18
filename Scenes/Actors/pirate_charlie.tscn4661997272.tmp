@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=3 uid="uid://dh4am13kemd17"]
+
+[ext_resource type="Script" uid="uid://55hosq7h7538" path="res://Scenes/Actors/pirate_charlie.gd" id="1_kc2f0"]
+[ext_resource type="Texture2D" uid="uid://ohnxvxymsgd2" path="res://Assets/Enemies/Kla'ed - Bomber - Base.png" id="1_w76ex"]
+[ext_resource type="Script" uid="uid://bu0bec0jffl5o" path="res://Components/HitBox.gd" id="2_kc2f0"]
+[ext_resource type="Script" uid="uid://bc1bysnspv2xu" path="res://Components/HurtBox.gd" id="3_i5hy5"]
+[ext_resource type="Script" uid="uid://dr061mb2blql5" path="res://Components/HealthComponent.gd" id="4_0amip"]
+[ext_resource type="Script" uid="uid://dbgqt4twdptii" path="res://Components/Spawner.gd" id="6_0amip"]
+[ext_resource type="PackedScene" uid="uid://dxe1bgbj8t1v3" path="res://Scenes/Projectiles/eBullet.tscn" id="7_qb135"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qb135"]
+size = Vector2(28, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0fa5k"]
+size = Vector2(26, 22)
+
+[node name="PirateCharlie" type="PathFollow2D"]
+script = ExtResource("1_kc2f0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5707964
+texture = ExtResource("1_w76ex")
+
+[node name="HitBox" type="Area2D" parent="Sprite2D"]
+collision_layer = 4
+script = ExtResource("2_kc2f0")
+metadata/_custom_type_script = "uid://bu0bec0jffl5o"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/HitBox"]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_qb135")
+
+[node name="HurtBox" type="Area2D" parent="Sprite2D" node_paths=PackedStringArray("health")]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("3_i5hy5")
+health = NodePath("HealthComponent")
+metadata/_custom_type_script = "uid://bc1bysnspv2xu"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/HurtBox"]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_0fa5k")
+debug_color = Color(0.93797415, 0.16866764, 0.46938825, 0.41960785)
+
+[node name="HealthComponent" type="Node" parent="Sprite2D/HurtBox"]
+script = ExtResource("4_0amip")
+maxHealth = 1
+metadata/_custom_type_script = "uid://dr061mb2blql5"
+
+[node name="Spawner" type="Timer" parent="Sprite2D" node_paths=PackedStringArray("spawnPosition")]
+autostart = true
+script = ExtResource("6_0amip")
+sceneToSpawn = ExtResource("7_qb135")
+spawnPosition = NodePath("")
+autoSpawn = true
+metadata/_custom_type_script = "uid://dbgqt4twdptii"
+
+[node name="BulletSpawnPosition" type="Marker2D" parent="Sprite2D"]
+position = Vector2(12, -5.2453663e-07)

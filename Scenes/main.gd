@@ -1,10 +1,13 @@
 extends Node
+
+# Signal to start Mission Brief
 signal briefStart
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	%CommandPortrait.visible = false
+	# Game starts paused in the main menu
+	get_tree().paused = true
+	
+	# Initialize Globals
 	Global.main_node = $"."
 	Global.stage_node = %Stage
 	Global.player_node = %Player
@@ -19,38 +22,50 @@ func change_stage(new_stage_path : String) -> void:
 	var loaded_scene = ResourceLoader.load(new_stage_path)
 	var current_scene = loaded_scene.instantiate()
 	Global.stage_node.add_child(current_scene)
+	
+	# Reset the player
+	%Player.visible = true
+	%Player._ready()
+	
+	# Start the game after stage load
+	get_tree().paused = false
 
 func _on_main_menu_start_game() -> void:
+	# Triggered on Main Menu -> Begin Mission
 	%"Main Menu"/MMUI.hide()
-	change_stage("res://Scenes/Levels/Stage1.tscn")
-	Global.stage_node.currentStage = 1 
+	
+	# Set Stage 1
+	change_stage("res://Scenes/Levels/Stage1/Stage1.tscn")
+	Global.stage_node.currentStage = 1
+	
+	# Show Score
 	$UI/Score.visible = true
-	%Player.visible = true
 
 func _on_main_menu_start_mission_brief() -> void:
+	# Triggered on Mission Brief
 	%"Main Menu"/MMUI.hide()
+	
+	# Show Command Portrait
 	%CommandPortrait.show()
+	
+	# Emit signal to the mission brief scene to play
 	briefStart.emit()
+	
+	# Hide the Mission Briefing menu item permanently
 	%"Mission Briefing".hide()
 
-
-func _on_timer_timeout() -> void:
-	
-	change_stage("res://Scenes/main_menu.tscn")
-
-
 func _on_mission_brief_briefover() -> void:
+	# Return to main menu after brief over
 	%"Main Menu"/MMUI.show()
 
-
 func _on_player_player_death() -> void:
+	# Pause the game and show the GameOver UI on player death
 	get_tree().paused = true 
 	%GOUI.show()
 	
-
 func _on_restart_pressed() -> void:
+	# Reset button on Game Over
 	if %Stage.currentStage == 1:
-			change_stage("res://Scenes/Levels/Stage1.tscn")
+			change_stage("res://Scenes/Levels/Stage1/Stage1.tscn")
 			%GOUI.hide()
 			get_tree().paused = false
-			

@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://sc7cdfed8olm"]
 
 [ext_resource type="Texture2D" uid="uid://cq5gpay6frarh" path="res://Assets/Player Assets/Player Ship Full HP.png" id="2_1p3rw"]
-[ext_resource type="Script" uid="uid://djvxgjtgk6qfl" path="res://Scenes/Actors/Player.gd" id="2_kne1u"]
+[ext_resource type="Script" uid="uid://djvxgjtgk6qfl" path="res://Scenes/Actors/Player/Player.gd" id="2_kne1u"]
 [ext_resource type="Script" uid="uid://dr061mb2blql5" path="res://Components/HealthComponent.gd" id="3_akrb1"]
 [ext_resource type="Script" uid="uid://bc1bysnspv2xu" path="res://Components/HurtBox.gd" id="4_26xe5"]
 [ext_resource type="Script" uid="uid://dbgqt4twdptii" path="res://Components/Spawner.gd" id="5_4fuvf"]
@@ -31,7 +31,7 @@ maxHealth = 3
 metadata/_custom_type_script = "uid://dr061mb2blql5"
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
-collision_mask = 4
+collision_mask = 12
 script = ExtResource("4_26xe5")
 health = NodePath("../HealthComponent")
 metadata/_custom_type_script = "uid://bc1bysnspv2xu"
@@ -39,12 +39,15 @@ metadata/_custom_type_script = "uid://bc1bysnspv2xu"
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HurtBox"]
 polygon = PackedVector2Array(0, -12, -4, -6, -4, -3, -14, 6, -14, 10, -4, 5, -2, 12, 2, 12, 4, 5, 14, 10, 14, 5, 5, -3, 5, -6)
 
-[node name="BulletSpawn" type="Timer" parent="." node_paths=PackedStringArray("siblingOf")]
+[node name="BulletSpawnPosition" type="Marker2D" parent="."]
+position = Vector2(0, -13)
+
+[node name="BulletSpawn" type="Timer" parent="." node_paths=PackedStringArray("spawnPosition")]
 unique_name_in_owner = true
-wait_time = 0.25
+wait_time = 0.2
 script = ExtResource("5_4fuvf")
 sceneToSpawn = ExtResource("6_6q7nd")
-siblingOf = NodePath("..")
+spawnPosition = NodePath("../BulletSpawnPosition")
 metadata/_custom_type_script = "uid://dbgqt4twdptii"
 
 [node name="LaserSFX" type="AudioStreamPlayer" parent="."]

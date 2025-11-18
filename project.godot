@@ -34,6 +34,15 @@ window/stretch/mode="viewport"
 window/stretch/aspect="keep_width"
 window/stretch/scale_mode="integer"
 
+[file_customization]
+
+folder_colors={
+"res://Scenes/Actors/PirateAlpha/": "red",
+"res://Scenes/Actors/PirateBeta/": "red",
+"res://Scenes/Actors/PirateCharlie/": "red",
+"res://Scenes/Actors/Player/": "blue"
+}
+
 [input]
 
 ui_focus_next={
@@ -84,6 +93,7 @@ speedUpHold={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 textures/default_filters/anisotropic_filtering_level=0
 textures/decals/filter=0
 textures/light_projectors/filter=0
