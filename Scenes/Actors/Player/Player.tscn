@@ -1,33 +1,74 @@
-[gd_scene load_steps=10 format=3 uid="uid://sc7cdfed8olm"]
+[gd_scene load_steps=14 format=3 uid="uid://sc7cdfed8olm"]
 
 [ext_resource type="Texture2D" uid="uid://cq5gpay6frarh" path="res://Assets/Player Assets/Player Ship Full HP.png" id="2_1p3rw"]
+[ext_resource type="Texture2D" uid="uid://b3jkaogbdq33l" path="res://Assets/Player Assets/Player Ship 3 HP.png" id="2_j1qpo"]
 [ext_resource type="Script" uid="uid://djvxgjtgk6qfl" path="res://Scenes/Actors/Player/Player.gd" id="2_kne1u"]
+[ext_resource type="Texture2D" uid="uid://s433uoxy2ayj" path="res://Assets/Player Assets/Player Ship 2 HP.png" id="3_6tggy"]
 [ext_resource type="Script" uid="uid://dr061mb2blql5" path="res://Components/HealthComponent.gd" id="3_akrb1"]
 [ext_resource type="Script" uid="uid://bc1bysnspv2xu" path="res://Components/HurtBox.gd" id="4_26xe5"]
+[ext_resource type="Texture2D" uid="uid://de7hdjjy38iwv" path="res://Assets/Player Assets/Player Ship 1 HP.png" id="4_bhfuo"]
 [ext_resource type="Script" uid="uid://dbgqt4twdptii" path="res://Components/Spawner.gd" id="5_4fuvf"]
 [ext_resource type="PackedScene" uid="uid://k6phmbhftrdq" path="res://Scenes/Projectiles/Bullet.tscn" id="6_6q7nd"]
 [ext_resource type="AudioStream" uid="uid://bpkl1ku3h8t1a" path="res://Assets/SFX/laserSmall_000.ogg" id="7_rplui"]
 [ext_resource type="Script" uid="uid://cv6wgnyjde582" path="res://Components/AudioJitterPlayer.gd" id="8_ut0tw"]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_th2x0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_j1qpo")
+}],
+"loop": true,
+"name": &"1DMG",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_6tggy")
+}],
+"loop": true,
+"name": &"2DMG",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_bhfuo")
+}],
+"loop": true,
+"name": &"3DMG",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_1p3rw")
+}],
+"loop": true,
+"name": &"Full",
+"speed": 5.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e80uo"]
-size = Vector2(135, 132)
+size = Vector2(30, 26)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("ship")]
+collision_mask = 16
 script = ExtResource("2_kne1u")
+ship = NodePath("Ship")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_1p3rw")
+[node name="Ship" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_th2x0")
+animation = &"Full"
 
 [node name="BodyShape" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_e80uo")
 debug_color = Color(0.93473625, 0.25693136, 0, 0.41960785)
 
 [node name="HealthComponent" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("3_akrb1")
-maxHealth = 3
+maxHealth = 4
 metadata/_custom_type_script = "uid://dr061mb2blql5"
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]

@@ -3,6 +3,7 @@ extends CharacterBody2D
 #export Vars
 @export var speed : float = 600.0
 @export var dash_speed : float = 1200.0
+@export var ship : AnimatedSprite2D
 
 signal PlayerDeath
 
@@ -13,16 +14,15 @@ var direction : Vector2 = Vector2.ZERO
 # Good for making sure our intial values make sense and other setup stuff
 func _ready() -> void:
 	current_speed = speed
-	
+	ship.animation = "Full"
 	# If we forgot to set the dash speed export, this is the fallback
 	if (dash_speed == 0):
 		dash_speed = speed * 2
 		
 	# initialize the HealthComponent
-	%HealthComponent.fullHeal()
-	
-	global_position = Vector2(161,479)
 
+	%HealthComponent.fullHeal()
+	global_position = Vector2(161,479)
 # _physics_process is where we put stuff that uses godot's physics system (it runs many times per frame).
 func _physics_process(_delta: float) -> void:
 	velocity = direction * current_speed
@@ -36,7 +36,19 @@ func _process(_delta: float) -> void:
 	if Input.is_action_pressed("shoot") == true:
 		%BulletSpawn.try_spawn()
 		%LaserSFX.playJitter()
-
+	
+#This is essentially check the current value of health if it's x match x with the corrosponding animation
+	match %HealthComponent.currentHealth:
+		4:
+			ship.animation = "Full"
+		3:
+			ship.animation = "1DMG" 
+		2:
+			ship.animation = "2DMG"
+		1:
+			ship.animation = "3DMG"
+			
+			
 # _input is run whenever we press or release a button.
 # Good for rising and falling edge stuff, not so good for held buttons or joysticks (that's why I put that in process)
 func _input(event: InputEvent) -> void:

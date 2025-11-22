@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://kpqmljsmcfrv"]
+[gd_scene load_steps=16 format=3 uid="uid://kpqmljsmcfrv"]
 
 [ext_resource type="Script" uid="uid://dumngckmby8mo" path="res://Scenes/main.gd" id="1_kln2b"]
 [ext_resource type="PackedScene" uid="uid://sc7cdfed8olm" path="res://Scenes/Actors/Player/Player.tscn" id="2_kln2b"]
@@ -11,6 +11,20 @@
 [ext_resource type="AudioStream" uid="uid://c2lekl8la7mny" path="res://Assets/SFX/click1.ogg" id="9_frkhe"]
 [ext_resource type="Script" uid="uid://cv6wgnyjde582" path="res://Components/AudioJitterPlayer.gd" id="10_1p5hy"]
 [ext_resource type="Script" uid="uid://drw0e0yysv28b" path="res://Scenes/UI/main_menu.gd" id="11_4kpch"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4kpch"]
+distance = -540.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_grg3l"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_frkhe"]
+normal = Vector2(0, 1)
+distance = 375.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1p5hy"]
+normal = Vector2(-1, 0)
+distance = -320.0
 
 [node name="Main" type="Node"]
 script = ExtResource("1_kln2b")
@@ -28,6 +42,24 @@ visible = false
 position = Vector2(161, 479)
 speed = 250.0
 dash_speed = 400.0
+
+[node name="Player Boundaries" type="Node" parent="."]
+
+[node name="Boundaries" type="StaticBody2D" parent="Player Boundaries"]
+visible = false
+collision_layer = 16
+
+[node name="Bottom" type="CollisionShape2D" parent="Player Boundaries/Boundaries"]
+shape = SubResource("WorldBoundaryShape2D_4kpch")
+
+[node name="Left" type="CollisionShape2D" parent="Player Boundaries/Boundaries"]
+shape = SubResource("WorldBoundaryShape2D_grg3l")
+
+[node name="Top" type="CollisionShape2D" parent="Player Boundaries/Boundaries"]
+shape = SubResource("WorldBoundaryShape2D_frkhe")
+
+[node name="Right" type="CollisionShape2D" parent="Player Boundaries/Boundaries"]
+shape = SubResource("WorldBoundaryShape2D_1p5hy")
 
 [node name="UI" type="Node" parent="."]
 unique_name_in_owner = true
