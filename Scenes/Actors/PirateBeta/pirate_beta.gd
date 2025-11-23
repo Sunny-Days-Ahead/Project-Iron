@@ -16,3 +16,4 @@ func _on_health_component_died() -> void:
 		scoreNode.addScore(points)
 
 	queue_free()
+

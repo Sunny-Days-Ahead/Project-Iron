@@ -14,6 +14,8 @@ signal spawned(entity : Node)
 ## When true, spawns automatically when timer complete.
 @export var autoSpawn : bool
 
+## If set, this function is called when spawning an entity. It must take the spawned node as its only parameter.
+var spawnFunction : Callable = Callable()
 var canSpawn : bool = true
 
 func _ready() -> void:
@@ -29,14 +31,26 @@ func _on_spawner_timeout() -> void:
 	if autoSpawn:
 		spawn()
 
-func try_spawn() -> void:
+## Try to spawn the scene if the timer/delay is OK. The spawnAction is optionally called and must take the spawned node as its only parameter.
+## If nothing is set, the spawnFunction Callable is used. If that is also not set, no function is called.
+## Returns true if spawned, false if not.
+func try_spawn(spawnAction : Callable = spawnFunction) -> bool:
 	if canSpawn:
-		spawn()
+		spawn(spawnAction)
+		return true
+	else:
+		return false
 
-func spawn() -> void:
+## Spawn the scene immediately. The spawnAction is optionally called and must take the spawned node as its only parameter.
+## If nothing is set, the spawnFunction Callable is used. If that is also not set, no function is called.
+func spawn(spawnAction : Callable = spawnFunction) -> void:
 	var newEntity = sceneToSpawn.instantiate()
 	
 	newEntity.global_position = spawnPosition.global_position
+	
+	if spawnAction.is_valid():
+		spawnAction.call(newEntity)
+	
 	spawnPosition.add_child(newEntity)
 	spawned.emit(newEntity)
 	

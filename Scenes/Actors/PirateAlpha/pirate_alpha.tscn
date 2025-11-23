@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://bu0bec0jffl5o" path="res://Components/HitBox.gd" id="4_8q80b"]
 [ext_resource type="Script" uid="uid://bc1bysnspv2xu" path="res://Components/HurtBox.gd" id="5_0pqlq"]
 [ext_resource type="Script" uid="uid://dbgqt4twdptii" path="res://Components/Spawner.gd" id="6_0pqlq"]
-[ext_resource type="PackedScene" uid="uid://dxe1bgbj8t1v3" path="res://Scenes/Projectiles/eBullet.tscn" id="7_7o5yl"]
+[ext_resource type="PackedScene" uid="uid://k6phmbhftrdq" path="res://Scenes/Projectiles/Bullet.tscn" id="6_kh0dm"]
 
 [sub_resource type="Curve2D" id="Curve2D_rhnia"]
 _data = {
@@ -58,9 +58,10 @@ shape = SubResource("RectangleShape2D_jreee")
 debug_color = Color(0.85425967, 0.34269592, 0.36912748, 0.41960785)
 
 [node name="Spawner" type="Timer" parent="PirateAlpha/Sprite2D" node_paths=PackedStringArray("spawnPosition")]
+unique_name_in_owner = true
 autostart = true
 script = ExtResource("6_0pqlq")
-sceneToSpawn = ExtResource("7_7o5yl")
+sceneToSpawn = ExtResource("6_kh0dm")
 spawnPosition = NodePath("../BulletSpawnPosition")
 autoSpawn = true
 metadata/_custom_type_script = "uid://dbgqt4twdptii"

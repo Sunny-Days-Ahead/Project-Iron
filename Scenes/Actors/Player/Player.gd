@@ -23,6 +23,7 @@ func _ready() -> void:
 
 	%HealthComponent.fullHeal()
 	global_position = Vector2(161,479)
+
 # _physics_process is where we put stuff that uses godot's physics system (it runs many times per frame).
 func _physics_process(_delta: float) -> void:
 	velocity = direction * current_speed
@@ -34,10 +35,13 @@ func _process(_delta: float) -> void:
 	direction = Input.get_vector("moveLeft", "moveRight", "moveUp", "moveDown")
 	
 	if Input.is_action_pressed("shoot") == true:
-		%BulletSpawn.try_spawn()
-		%LaserSFX.playJitter()
+		# The spawner's spawn and try_spawn functions take an optional input, which is a Callable (function) that is executed with the spawned node as its parameter.
+		var bulletSpawned = %BulletSpawn.try_spawn(setup_bullet)
+		
+		if bulletSpawned:
+			%LaserSFX.playJitter()
 	
-#This is essentially check the current value of health if it's x match x with the corrosponding animation
+	#This is essentially check the current value of health if it's x match x with the corrosponding animation
 	match %HealthComponent.currentHealth:
 		4:
 			ship.animation = "Full"
@@ -60,4 +64,10 @@ func _input(event: InputEvent) -> void:
 
 func _on_health_component_died() -> void:
 	PlayerDeath.emit()
-	#print("Oh no i emitted a signal")
+
+# This function sets the initial state of the bullet that the player fires with the spawner.
+func setup_bullet(bulletNode : Node2D) -> void:
+	bulletNode.is_player_bullet = true
+	bulletNode.direction = Vector2.UP
+	bulletNode.speed = 200.0
+	bulletNode.damage = 1

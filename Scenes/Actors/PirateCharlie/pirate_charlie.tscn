@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://bc1bysnspv2xu" path="res://Components/HurtBox.gd" id="3_i5hy5"]
 [ext_resource type="Script" uid="uid://dr061mb2blql5" path="res://Components/HealthComponent.gd" id="4_0amip"]
 [ext_resource type="Script" uid="uid://dbgqt4twdptii" path="res://Components/Spawner.gd" id="6_0amip"]
-[ext_resource type="PackedScene" uid="uid://dxe1bgbj8t1v3" path="res://Scenes/Projectiles/eBullet.tscn" id="7_qb135"]
+[ext_resource type="PackedScene" uid="uid://k6phmbhftrdq" path="res://Scenes/Projectiles/Bullet.tscn" id="7_4xwbh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qb135"]
 size = Vector2(28, 25)
@@ -54,9 +54,10 @@ maxHealth = 1
 metadata/_custom_type_script = "uid://dr061mb2blql5"
 
 [node name="Spawner" type="Timer" parent="Sprite2D" node_paths=PackedStringArray("spawnPosition")]
+unique_name_in_owner = true
 autostart = true
 script = ExtResource("6_0amip")
-sceneToSpawn = ExtResource("7_qb135")
+sceneToSpawn = ExtResource("7_4xwbh")
 spawnPosition = NodePath("../../BulletSpawnPosition")
 autoSpawn = true
 metadata/_custom_type_script = "uid://dbgqt4twdptii"
