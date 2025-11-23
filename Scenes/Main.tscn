@@ -36,6 +36,9 @@ process_mode = 3
 unique_name_in_owner = true
 script = ExtResource("3_4kpch")
 
+[node name="Bullets" type="Node" parent="."]
+unique_name_in_owner = true
+
 [node name="Player" parent="." instance=ExtResource("2_kln2b")]
 unique_name_in_owner = true
 visible = false

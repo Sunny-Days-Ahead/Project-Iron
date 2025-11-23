@@ -22,6 +22,7 @@ var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 var main_node : Node
 var stage_node : Node
 var player_node : CharacterBody2D
+var bullet_container : Node
 var ui_node : Node
 
 # Window variables

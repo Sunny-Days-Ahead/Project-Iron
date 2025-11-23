@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dh4am13kemd17"]
+[gd_scene load_steps=12 format=3 uid="uid://dh4am13kemd17"]
 
 [ext_resource type="Script" uid="uid://55hosq7h7538" path="res://Scenes/Actors/PirateCharlie/pirate_charlie.gd" id="1_kc2f0"]
 [ext_resource type="Texture2D" uid="uid://ohnxvxymsgd2" path="res://Assets/Enemies/Kla'ed - Bomber - Base.png" id="1_w76ex"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://dr061mb2blql5" path="res://Components/HealthComponent.gd" id="4_0amip"]
 [ext_resource type="Script" uid="uid://dbgqt4twdptii" path="res://Components/Spawner.gd" id="6_0amip"]
 [ext_resource type="PackedScene" uid="uid://k6phmbhftrdq" path="res://Scenes/Projectiles/Bullet.tscn" id="7_4xwbh"]
+[ext_resource type="AudioStream" uid="uid://bpkl1ku3h8t1a" path="res://Assets/SFX/laserSmall_000.ogg" id="8_jswbd"]
+[ext_resource type="Script" uid="uid://cv6wgnyjde582" path="res://Components/AudioJitterPlayer.gd" id="9_l6vol"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qb135"]
 size = Vector2(28, 25)
@@ -62,4 +64,14 @@ spawnPosition = NodePath("../../BulletSpawnPosition")
 autoSpawn = true
 metadata/_custom_type_script = "uid://dbgqt4twdptii"
 
+[node name="BulletSFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("8_jswbd")
+pitch_scale = 1.5
+script = ExtResource("9_l6vol")
+jitter = 0.2
+basePitchScale = 1.5
+metadata/_custom_type_script = "uid://cv6wgnyjde582"
+
 [connection signal="died" from="Sprite2D/HurtBox/HealthComponent" to="." method="_on_health_component_died"]
+[connection signal="spawned" from="Sprite2D/Spawner" to="." method="_on_spawner_spawned"]

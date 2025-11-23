@@ -24,3 +24,6 @@ func setup_bullet(bulletNode : Node2D) -> void:
 	bulletNode.direction = Vector2.DOWN
 	bulletNode.speed = 200.0
 	bulletNode.damage = 1
+
+func _on_spawner_spawned(entity: Node) -> void:
+	%BulletSFX.playJitter()

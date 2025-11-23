@@ -12,6 +12,7 @@ func _ready() -> void:
 	Global.stage_node = %Stage
 	Global.player_node = %Player
 	Global.ui_node = %UI
+	Global.bullet_container = %Bullets
 
 func change_stage(new_stage_path : String) -> void:
 	# queue_free on all of the children inside of the Stage container

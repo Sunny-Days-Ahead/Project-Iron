@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bgny6g2pkkxll"]
+[gd_scene load_steps=13 format=3 uid="uid://bgny6g2pkkxll"]
 
 [ext_resource type="Script" uid="uid://dh6isx61ji1wj" path="res://Scenes/Actors/PirateAlpha/pirate_alpha.gd" id="1_74yi4"]
 [ext_resource type="Texture2D" uid="uid://u080gu3axudh" path="res://Assets/Enemies/Kla'ed - Fighter - Base.png" id="2_74yi4"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://bc1bysnspv2xu" path="res://Components/HurtBox.gd" id="5_0pqlq"]
 [ext_resource type="Script" uid="uid://dbgqt4twdptii" path="res://Components/Spawner.gd" id="6_0pqlq"]
 [ext_resource type="PackedScene" uid="uid://k6phmbhftrdq" path="res://Scenes/Projectiles/Bullet.tscn" id="6_kh0dm"]
+[ext_resource type="AudioStream" uid="uid://bpkl1ku3h8t1a" path="res://Assets/SFX/laserSmall_000.ogg" id="8_f2qte"]
+[ext_resource type="Script" uid="uid://cv6wgnyjde582" path="res://Components/AudioJitterPlayer.gd" id="9_0dp6n"]
 
 [sub_resource type="Curve2D" id="Curve2D_rhnia"]
 _data = {
@@ -74,4 +76,13 @@ metadata/_custom_type_script = "uid://dr061mb2blql5"
 [node name="BulletSpawnPosition" type="Marker2D" parent="PirateAlpha/Sprite2D"]
 position = Vector2(12, -5.2453663e-07)
 
+[node name="BulletSFX" type="AudioStreamPlayer" parent="PirateAlpha/Sprite2D"]
+unique_name_in_owner = true
+stream = ExtResource("8_f2qte")
+script = ExtResource("9_0dp6n")
+jitter = 0.2
+basePitchScale = 1.5
+metadata/_custom_type_script = "uid://cv6wgnyjde582"
+
+[connection signal="spawned" from="PirateAlpha/Sprite2D/Spawner" to="." method="_on_spawner_spawned"]
 [connection signal="died" from="PirateAlpha/Sprite2D/HealthComponent" to="." method="_on_health_component_died"]

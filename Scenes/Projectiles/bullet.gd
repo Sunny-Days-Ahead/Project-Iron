@@ -29,6 +29,9 @@ func _ready() -> void:
 
 	global_rotation = direction.angle()
 
+	self.get_parent().remove_child(self)
+	Global.bullet_container.add_child(self)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	global_position += direction * speed * delta
