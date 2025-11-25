@@ -36,7 +36,7 @@ func _on_main_menu_start_game() -> void:
 	%"Main Menu"/MMUI.hide()
 	
 	# Set Stage 1
-	change_stage("res://Scenes/Levels/Stage1/Stage1.tscn")
+	change_stage("res://Scenes/Levels/DebugStage.tscn")
 	Global.stage_node.currentStage = 1
 	
 	# Show Score

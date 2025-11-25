@@ -36,9 +36,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	global_position += direction * speed * delta
 
-# Timer to queue free after I fly off screen
-func _on_timer_timeout() -> void:
-	queue_free()
 
 # Or if I hit a hurtbox, also queuefree
 func _on_hit_box_hit_target() -> void:
