@@ -1,10 +1,14 @@
+## Tracks how much health something has
 @icon("res://Assets/Icons/heart.svg")
 class_name HealthComponent
 extends Node
 
 @export var maxHealth : int
 
+## Current HP
 var currentHealth : int 
+
+## Emitted when HP = 0
 signal died #emtis when out of hp
 
 # Called when the node enters the scene tree for the first time.
