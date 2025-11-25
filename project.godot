@@ -37,9 +37,12 @@ window/stretch/scale_mode="integer"
 [file_customization]
 
 folder_colors={
-"res://Scenes/Actors/PirateAlpha/": "red",
-"res://Scenes/Actors/PirateBeta/": "red",
-"res://Scenes/Actors/PirateCharlie/": "red",
+"res://Depreciated/": "gray",
+"res://Depreciated/PirateAlpha/": "gray",
+"res://Depreciated/PirateBeta/": "gray",
+"res://Depreciated/PirateCharlie/": "gray",
+"res://Scenes/Actors/Asteroid/": "red",
+"res://Scenes/Actors/Pirates/": "red",
 "res://Scenes/Actors/Player/": "blue"
 }
 

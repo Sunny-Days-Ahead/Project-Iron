@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://bgny6g2pkkxll"]
 
-[ext_resource type="Script" uid="uid://dh6isx61ji1wj" path="res://Scenes/Actors/PirateAlpha/pirate_alpha.gd" id="1_74yi4"]
+[ext_resource type="Script" uid="uid://dh6isx61ji1wj" path="res://Depreciated/PirateAlpha/pirate_alpha.gd" id="1_74yi4"]
 [ext_resource type="Texture2D" uid="uid://u080gu3axudh" path="res://Assets/Enemies/Kla'ed - Fighter - Base.png" id="2_74yi4"]
 [ext_resource type="Script" uid="uid://dr061mb2blql5" path="res://Components/HealthComponent.gd" id="3_y16ob"]
 [ext_resource type="Script" uid="uid://bu0bec0jffl5o" path="res://Components/HitBox.gd" id="4_8q80b"]
