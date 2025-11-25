@@ -224,6 +224,11 @@ text = "Begin Mission
 layout_mode = 2
 text = "Exit"
 
+[node name="Button" type="Button" parent="UI/Main Menu/MMUI/marginC/vertiButtons"]
+layout_mode = 2
+text = "Debug Stage
+"
+
 [node name="Game Over" type="Node" parent="UI"]
 
 [node name="GOUI" type="Control" parent="UI/Game Over"]
@@ -283,4 +288,5 @@ text = "Restart"
 [connection signal="pressed" from="UI/Main Menu/MMUI/marginC/vertiButtons/Mission Briefing" to="UI/Main Menu" method="_on_mission_briefing_pressed"]
 [connection signal="pressed" from="UI/Main Menu/MMUI/marginC/vertiButtons/Begin Mission" to="UI/Main Menu" method="_on_begin_mission_pressed"]
 [connection signal="pressed" from="UI/Main Menu/MMUI/marginC/vertiButtons/Exit" to="UI/Main Menu" method="_on_exit_pressed"]
+[connection signal="pressed" from="UI/Main Menu/MMUI/marginC/vertiButtons/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="UI/Game Over/GOUI/GOContainer/Restart" to="." method="_on_restart_pressed"]

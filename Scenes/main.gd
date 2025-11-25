@@ -36,7 +36,7 @@ func _on_main_menu_start_game() -> void:
 	%"Main Menu"/MMUI.hide()
 	
 	# Set Stage 1
-	change_stage("res://Scenes/Levels/DebugStage.tscn")
+	change_stage("res://Scenes/Levels/Stage1/Stage1.tscn")
 	Global.stage_node.currentStage = 1
 	
 	# Show Score
@@ -66,7 +66,18 @@ func _on_player_player_death() -> void:
 	
 func _on_restart_pressed() -> void:
 	# Reset button on Game Over
-	if %Stage.currentStage == 1:
+	match %Stage.currentStage:
+		0:
+			change_stage("res://Scenes/Levels/DebugStage.tscn")
+			%GOUI.hide()
+			get_tree().paused = false
+		1:
 			change_stage("res://Scenes/Levels/Stage1/Stage1.tscn")
 			%GOUI.hide()
 			get_tree().paused = false
+
+
+func _on_button_pressed() -> void:
+	%"Main Menu"/MMUI.hide()
+	change_stage("res://Scenes/Levels/DebugStage.tscn")
+	Global.stage_node.currentStage = 0
