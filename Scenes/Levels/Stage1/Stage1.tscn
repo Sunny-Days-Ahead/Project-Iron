@@ -4,9 +4,9 @@
 
 [sub_resource type="Curve2D" id="Curve2D_yr0dh"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 8, -32, 0, 0, 0, 0, 312, -32)
+"points": PackedVector2Array(0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 159, -96, 0, 0, 0, 0, 320, -3)
 }
-point_count = 2
+point_count = 3
 
 [sub_resource type="Animation" id="Animation_uj6h6"]
 resource_name = "Stage1"
@@ -18,26 +18,20 @@ tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(5, 12, 15, 18, 18.5, 19),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(5, 7, 9, 12),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
-"args": [1],
-"method": &"spawnBeta"
+"args": [5],
+"method": &"spawnAsteroid"
 }, {
-"args": [2],
-"method": &"spawnBeta"
+"args": [4],
+"method": &"spawnAsteroid"
 }, {
-"args": [3],
-"method": &"spawnBeta"
+"args": [5],
+"method": &"spawnAsteroid"
 }, {
-"args": [],
-"method": &"spawnCharlie"
-}, {
-"args": [],
-"method": &"spawnCharlie"
-}, {
-"args": [],
-"method": &"spawnCharlie"
+"args": [5],
+"method": &"spawnSeeker"
 }]
 }
 
@@ -67,15 +61,18 @@ point_count = 7
 [node name="Stage1" type="Node2D"]
 script = ExtResource("1_yr0dh")
 
-[node name="PirateSpawner" type="Path2D" parent="."]
+[node name="AsteroidSpawner" type="Path2D" parent="."]
+position = Vector2(-1, -30)
 curve = SubResource("Curve2D_yr0dh")
 
-[node name="pirate_spawn_1" type="Timer" parent="PirateSpawner"]
+[node name="AsteroidSpawn1" type="Timer" parent="AsteroidSpawner"]
 autostart = true
 
-[node name="PirateSpawnPoint" type="PathFollow2D" parent="PirateSpawner"]
+[node name="AsteroidSpawnPoint" type="PathFollow2D" parent="AsteroidSpawner"]
 unique_name_in_owner = true
-position = Vector2(8, -32)
+position = Vector2(36.32232, -21.461664)
+rotation = -0.5459853
+progress = 41.344
 
 [node name="Stage 1 Timing" type="Node" parent="."]
 
@@ -107,4 +104,4 @@ position = Vector2(-23, 135)
 [node name="SpawnPath" type="Path2D" parent="AlphaSpawnPoints/Point3"]
 curve = SubResource("Curve2D_uj6h6")
 
-[connection signal="timeout" from="PirateSpawner/pirate_spawn_1" to="." method="_on_pirate_spawn_1_timeout"]
+[connection signal="timeout" from="AsteroidSpawner/AsteroidSpawn1" to="." method="_on_pirate_spawn_1_timeout"]

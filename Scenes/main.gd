@@ -20,6 +20,7 @@ func change_stage(new_stage_path : String) -> void:
 		child.queue_free()
 	
 	# Load the scene, instantiate it, then add it to the stage container
+	print(new_stage_path)
 	var loaded_scene = ResourceLoader.load(new_stage_path)
 	var current_scene = loaded_scene.instantiate()
 	Global.stage_node.add_child(current_scene)
