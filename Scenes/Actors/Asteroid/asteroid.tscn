@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bqfvmwpbprnx2" path="res://Scenes/Actors/Pirates/seeker/seeker_pirate.tscn" id="1_0s201"]
 [ext_resource type="Texture2D" uid="uid://cg8yt5t5s65jy" path="res://Assets/Enemies/Asteroid 01 - Base.png" id="2_8da8i"]
-[ext_resource type="Script" uid="uid://kvtk4pgrgpmv" path="res://Scenes/Actors/Asteroid/asteroid.gd" id="2_60ikl"]
+[ext_resource type="Script" path="res://Scenes/Actors/Asteroid/asteroid.gd" id="2_60ikl"]
 [ext_resource type="Texture2D" uid="uid://btf83fgl4k72y" path="res://Assets/Enemies/Asteroid 01 - Explode.png" id="3_omr0m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_60ikl"]
@@ -71,7 +71,6 @@ animations = [{
 
 [node name="Asteroid" instance=ExtResource("1_0s201")]
 script = ExtResource("2_60ikl")
-points = 0
 
 [node name="Sprite2D" parent="." index="0"]
 unique_name_in_owner = true
