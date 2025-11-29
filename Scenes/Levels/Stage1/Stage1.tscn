@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://7k2ic2y7146w"]
+[gd_scene load_steps=9 format=3 uid="uid://7k2ic2y7146w"]
 
 [ext_resource type="Script" uid="uid://cukwu4avkqd54" path="res://Scenes/Levels/Stage1/stage_1.gd" id="1_yr0dh"]
+[ext_resource type="Script" uid="uid://cjk407wahqfjv" path="res://Components/SpeechLabel.gd" id="2_o7brr"]
 
 [sub_resource type="Curve2D" id="Curve2D_yr0dh"]
 _data = {
@@ -18,8 +19,8 @@ tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(5, 7, 9, 12),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(5, 7, 9, 18, 19.966667, 20.533333, 21, 21.566668, 22.033333, 22.533333, 23, 23.566668, 24.066668, 24.466667, 25, 25.533333, 26.066668, 26.466667, 27.066668, 27.566668, 33.033333, 34.033333, 35.033333, 36.033333, 37, 43.066666, 49.766666, 50.033333, 50.333332, 60),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "values": [{
 "args": [5],
 "method": &"spawnAsteroid"
@@ -32,6 +33,84 @@ tracks/0/keys = {
 }, {
 "args": [5],
 "method": &"spawnSeeker"
+}, {
+"args": [],
+"method": &"spawnPFP"
+}, {
+"args": [],
+"method": &"spawnPFP"
+}, {
+"args": [],
+"method": &"spawnPFP"
+}, {
+"args": [],
+"method": &"spawnPFP"
+}, {
+"args": [],
+"method": &"spawnPFP"
+}, {
+"args": [],
+"method": &"spawnPFP"
+}, {
+"args": [],
+"method": &"spawnPFP"
+}, {
+"args": [],
+"method": &"spawnPFP"
+}, {
+"args": [],
+"method": &"spawnPFP"
+}, {
+"args": [],
+"method": &"spawnPFP"
+}, {
+"args": [],
+"method": &"spawnPFP"
+}, {
+"args": [],
+"method": &"spawnPFP"
+}, {
+"args": [],
+"method": &"spawnPFP"
+}, {
+"args": [],
+"method": &"spawnPFP"
+}, {
+"args": [],
+"method": &"spawnPFP"
+}, {
+"args": [],
+"method": &"spawnPFP"
+}, {
+"args": [],
+"method": &"spawnFighter"
+}, {
+"args": [],
+"method": &"spawnFighter"
+}, {
+"args": [],
+"method": &"spawnFighter"
+}, {
+"args": [],
+"method": &"spawnFighter"
+}, {
+"args": [],
+"method": &"spawnFighter"
+}, {
+"args": [10],
+"method": &"spawnAsteroid"
+}, {
+"args": [],
+"method": &"spawnPFP"
+}, {
+"args": [],
+"method": &"spawnPFP"
+}, {
+"args": [],
+"method": &"spawnPFP"
+}, {
+"args": [],
+"method": &"pause"
 }]
 }
 
@@ -83,6 +162,17 @@ libraries = {
 }
 autoplay = "Stage1"
 
+[node name="Win" type="Label" parent="Stage 1 Timing"]
+unique_name_in_owner = true
+offset_top = 96.0
+offset_right = 320.0
+offset_bottom = 168.0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_o7brr")
+dialogue = "Stage 1 Complete"
+metadata/_custom_type_script = "uid://cjk407wahqfjv"
+
 [node name="AlphaSpawnPoints" type="Node" parent="."]
 unique_name_in_owner = true
 
@@ -105,3 +195,4 @@ position = Vector2(-23, 135)
 curve = SubResource("Curve2D_uj6h6")
 
 [connection signal="timeout" from="AsteroidSpawner/AsteroidSpawn1" to="." method="_on_pirate_spawn_1_timeout"]
+[connection signal="finished" from="Stage 1 Timing/Win" to="." method="_on_win_finished"]

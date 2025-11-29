@@ -28,11 +28,28 @@ func spawnSeeker(count :int):
 		newScout.global_position = %AsteroidSpawnPoint.global_position
 		add_child(newScout)
 
+func spawnFighter():
+	var newFighter = preload("res://Scenes/Actors/Pirates/seeker/fighter(horizontal/fighterPirate.tscn").instantiate()
+	newSpawn.pick_random().get_children()[0].add_child(newFighter)
+
+
 func spawnPFP():
 	## These spawn at a spawn point, but are attached to the SpawnPath inside of that point
 	var newBomber = preload("res://Scenes/Actors/Pirates/pathFollow/pathFollowPirate.tscn").instantiate()
 	newSpawn.pick_random().get_children()[0].add_child(newBomber)
 
+
+func pause():
+	for child in Global.bullet_container.get_children():
+		print("i tried")
+		child.queue_free()
+	get_tree().paused = true
+	Global.player_node.hide()
+	get_tree().paused = false
+	%Win.show()
+	%Win.start()
+	
+	
 #func spawnAlpha():           ##Depreciated##
 	## These spawn randomly at a spawn point and not much else is needed
 	#var newFighter = preload("res://Depreciated/PirateAlpha/pirate_alpha.tscn").instantiate()
@@ -50,3 +67,7 @@ func spawnPFP():
 	## These spawn at a spawn point, but are attached to the SpawnPath inside of that point
 	#var newBomber = preload("res://Depreciated/PirateCharlie/pirate_charlie.tscn").instantiate()
 	#newSpawn.pick_random().get_children()[0].add_child(newBomber)
+
+
+func _on_win_finished() -> void:
+	pass # Replace with function body.
