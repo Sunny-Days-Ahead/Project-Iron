@@ -5,6 +5,8 @@ extends Area2D
 #drag and drop in the healthcomponent or the HEART of the entity
 @export var health : HealthComponent
 
+signal hit(area: Area2D)
+
 func _ready() -> void:
 	area_entered.connect(_on_hit)
 	
@@ -16,3 +18,5 @@ func _on_hit(area: Area2D) -> void:
 			health.heal(-area.damage)
 		else:
 			health.damage(area.damage)
+	
+	hit.emit(area)

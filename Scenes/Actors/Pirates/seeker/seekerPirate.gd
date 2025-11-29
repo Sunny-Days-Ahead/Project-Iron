@@ -6,9 +6,11 @@ extends Node2D
 @export var speed : float = 50.0
 @export var maxSpeed : float = 400.0
 @export var speedRamp : float = 225.0
+@export var dropChance = 0.25
 
 var desiredDirection := Vector2(0, 0)
 var desiredRotation : float
+
 
 func _ready() -> void:
 	pass
@@ -31,4 +33,7 @@ func _on_health_component_died() -> void:
 	if scoreNode.has_method("addScore"):
 		scoreNode.addScore(points)
 
+	if randf() <= dropChance:
+		$pickupSpawn.spawn()
+	
 	queue_free()

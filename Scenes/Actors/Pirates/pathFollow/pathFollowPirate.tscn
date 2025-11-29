@@ -12,10 +12,10 @@
 [ext_resource type="Script" uid="uid://cv6wgnyjde582" path="res://Components/AudioJitterPlayer.gd" id="10_se86h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0k4i6"]
-size = Vector2(28, 25)
+size = Vector2(20, 25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_denm4"]
-size = Vector2(26, 22)
+size = Vector2(44, 42.000004)
 
 [node name="pathFollowPirate" type="PathFollow2D"]
 script = ExtResource("1_qn5hg")
@@ -42,7 +42,7 @@ damage = 1
 metadata/_custom_type_script = "uid://bu0bec0jffl5o"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/HitBox"]
-position = Vector2(0, 2.5)
+position = Vector2(-9.930815e-09, 2.5)
 shape = SubResource("RectangleShape2D_0k4i6")
 
 [node name="HurtBox" type="Area2D" parent="Sprite2D" node_paths=PackedStringArray("health")]
@@ -80,4 +80,5 @@ jitter = 0.2
 basePitchScale = 1.5
 metadata/_custom_type_script = "uid://cv6wgnyjde582"
 
+[connection signal="died" from="Sprite2D/HurtBox/HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="spawned" from="Sprite2D/Spawner" to="." method="_on_spawner_spawned"]

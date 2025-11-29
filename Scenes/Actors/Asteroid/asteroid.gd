@@ -13,6 +13,9 @@ func _on_health_component_died() -> void:
 	$HitBox.queue_free()
 	%Sprite2D.hide()
 	%Explodes.play()
+	
+	if randf() <= dropChance:
+		$pickupSpawn.spawn()
 
 func _on_explodes_animation_finished() -> void:
 	queue_free()

@@ -71,6 +71,7 @@ animations = [{
 
 [node name="Asteroid" instance=ExtResource("1_0s201")]
 script = ExtResource("2_60ikl")
+dropChance = 0.05
 
 [node name="Sprite2D" parent="." index="0"]
 unique_name_in_owner = true

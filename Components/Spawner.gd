@@ -51,7 +51,7 @@ func spawn(spawnAction : Callable = spawnFunction) -> void:
 	if spawnAction.is_valid():
 		spawnAction.call(newEntity)
 	
-	spawnPosition.add_child(newEntity)
+	spawnPosition.call_deferred("add_child", newEntity)
 	spawned.emit(newEntity)
 	
 	canSpawn = false
