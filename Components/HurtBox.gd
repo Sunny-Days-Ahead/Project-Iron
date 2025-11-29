@@ -13,6 +13,6 @@ func _on_hit(area: Area2D) -> void:
 	if area is HitBox:
 		# We can use negative "damage" to heal
 		if area.damage < 0:
-			health.heal(area.damage)
+			health.heal(-area.damage)
 		else:
 			health.damage(area.damage)

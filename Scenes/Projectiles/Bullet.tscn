@@ -69,7 +69,6 @@ damage = 1
 metadata/_custom_type_script = "uid://bu0bec0jffl5o"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-top_level = true
 position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_3pu08")
 

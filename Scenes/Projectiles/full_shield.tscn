@@ -1,0 +1,144 @@
+[gd_scene load_steps=21 format=3 uid="uid://dtjoes5yy3mpw"]
+
+[ext_resource type="PackedScene" uid="uid://k6phmbhftrdq" path="res://Scenes/Projectiles/Bullet.tscn" id="1_66eqj"]
+[ext_resource type="Script" uid="uid://1k3pcpx32jkb" path="res://Scenes/Projectiles/full_shield.gd" id="2_66eqj"]
+[ext_resource type="Texture2D" uid="uid://5cfxl8ueu4ou" path="res://Assets/pickups/Pickup Icon - Shield Generator - All around shield.png" id="3_defda"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4g44"]
+atlas = ExtResource("3_defda")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7wq3n"]
+atlas = ExtResource("3_defda")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ogc0h"]
+atlas = ExtResource("3_defda")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tmm1l"]
+atlas = ExtResource("3_defda")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xhkoh"]
+atlas = ExtResource("3_defda")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qup03"]
+atlas = ExtResource("3_defda")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gh0li"]
+atlas = ExtResource("3_defda")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwhiv"]
+atlas = ExtResource("3_defda")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ta0s1"]
+atlas = ExtResource("3_defda")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5vyql"]
+atlas = ExtResource("3_defda")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jrd13"]
+atlas = ExtResource("3_defda")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_58yug"]
+atlas = ExtResource("3_defda")
+region = Rect2(352, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hmqpg"]
+atlas = ExtResource("3_defda")
+region = Rect2(384, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7fmc"]
+atlas = ExtResource("3_defda")
+region = Rect2(416, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t48qn"]
+atlas = ExtResource("3_defda")
+region = Rect2(448, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eqpte"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4g44")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7wq3n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ogc0h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tmm1l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xhkoh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qup03")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gh0li")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bwhiv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ta0s1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5vyql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jrd13")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_58yug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hmqpg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v7fmc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t48qn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_03oie"]
+radius = 12.0
+
+[node name="fullShield" instance=ExtResource("1_66eqj")]
+script = ExtResource("2_66eqj")
+is_player_bullet = false
+direction = Vector2(0, 1)
+speed = 100.0
+damage = -4
+
+[node name="Animation" parent="." index="0"]
+rotation = 0.0
+sprite_frames = SubResource("SpriteFrames_eqpte")
+animation = &"default"
+autoplay = "default"
+frame_progress = 0.36297318
+
+[node name="HitBox" parent="." index="1"]
+collision_layer = 32
+collision_mask = 1
+damage = -4
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2(0, 0)
+shape = SubResource("CircleShape2D_03oie")
