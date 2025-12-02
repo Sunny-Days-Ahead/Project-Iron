@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://7k2ic2y7146w"]
+[gd_scene load_steps=10 format=3 uid="uid://7k2ic2y7146w"]
 
 [ext_resource type="Script" uid="uid://cukwu4avkqd54" path="res://Scenes/Levels/Stage1/stage_1.gd" id="1_yr0dh"]
 [ext_resource type="Script" uid="uid://cjk407wahqfjv" path="res://Components/SpeechLabel.gd" id="2_o7brr"]
+[ext_resource type="Texture2D" uid="uid://ducgby4gctgem" path="res://Assets/portrait/Astronaut_RetroPixel.png" id="2_pvmua"]
 
 [sub_resource type="Curve2D" id="Curve2D_yr0dh"]
 _data = {
@@ -19,7 +20,7 @@ tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(5, 7, 9, 18, 19.966667, 20.533333, 21, 21.566668, 22.033333, 22.533333, 23, 23.566668, 24.066668, 24.466667, 25, 25.533333, 26.066668, 26.466667, 27.066668, 27.566668, 33.033333, 34.033333, 35.033333, 36.033333, 37, 43.066666, 49.766666, 50.033333, 50.333332, 60),
+"times": PackedFloat32Array(5, 7, 9, 18, 19.966667, 20.533333, 21, 21.566668, 22.033333, 22.533333, 23, 23.566668, 24.066668, 24.466667, 25, 25.533333, 26.066668, 26.466667, 27.066668, 27.566668, 33.033333, 34.033333, 35.033333, 36.033333, 37, 43.066666, 49.766666, 50.033333, 50.333332, 59.966667),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "values": [{
 "args": [5],
@@ -110,7 +111,7 @@ tracks/0/keys = {
 "method": &"spawnPFP"
 }, {
 "args": [],
-"method": &"pause"
+"method": &"stageEnd"
 }]
 }
 
@@ -121,9 +122,9 @@ _data = {
 
 [sub_resource type="Curve2D" id="Curve2D_rhnia"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, -162.28398, -2.2539444, 162.28398, 2.2539444, 164, 255, 0, 0, 0, 0, 346, 496)
+"points": PackedVector2Array(0, 0, 0, 0, 410, 24, 0, 0, 0, 0, 329, 29, 0, 0, 0, 0, 193, -27, 0, 0, 0, 0, 127, 3, 0, 0, 0, 0, 35, 117, -162.28398, -2.2539444, 162.28398, 2.2539444, 164, 255, 0, 0, 0, 0, 346, 496)
 }
-point_count = 3
+point_count = 7
 
 [sub_resource type="Curve2D" id="Curve2D_b8x3k"]
 _data = {
@@ -133,7 +134,7 @@ point_count = 3
 
 [sub_resource type="Curve2D" id="Curve2D_uj6h6"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, -3.3000002, -79.200005, 3.3000002, 79.200005, 273, 69, 53.9, -18.7, -53.9, 18.7, 216, 213, -9.900001, 64.9, 9.900001, -64.9, 78, 166, -71.5, -19.800001, 71.5, 19.800001, 210, 103, 34.73075, -28.039507, -34.73075, 28.039507, 258, 199, 0, 0, 0, 0, 190, 403)
+"points": PackedVector2Array(0, 0, 0, 0, 86, -250, -3.3000002, -79.200005, 3.3000002, 79.200005, 273, 69, 53.9, -18.7, -53.9, 18.7, 216, 213, -9.900001, 64.9, 9.900001, -64.9, 78, 166, -71.5, -19.800001, 71.5, 19.800001, 210, 103, 34.73075, -28.039507, -34.73075, 28.039507, 258, 199, 0, 0, 0, 0, 190, 403)
 }
 point_count = 7
 
@@ -162,17 +163,6 @@ libraries = {
 }
 autoplay = "Stage1"
 
-[node name="Win" type="Label" parent="Stage 1 Timing"]
-unique_name_in_owner = true
-offset_top = 96.0
-offset_right = 320.0
-offset_bottom = 168.0
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("2_o7brr")
-dialogue = "Stage 1 Complete"
-metadata/_custom_type_script = "uid://cjk407wahqfjv"
-
 [node name="AlphaSpawnPoints" type="Node" parent="."]
 unique_name_in_owner = true
 
@@ -194,5 +184,45 @@ position = Vector2(-23, 135)
 [node name="SpawnPath" type="Path2D" parent="AlphaSpawnPoints/Point3"]
 curve = SubResource("Curve2D_uj6h6")
 
+[node name="Node" type="Node" parent="."]
+
+[node name="Ace" type="TextureRect" parent="Node"]
+unique_name_in_owner = true
+offset_top = 432.0
+offset_right = 105.0
+offset_bottom = 546.0
+pivot_offset = Vector2(833, 801)
+texture = ExtResource("2_pvmua")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Win" type="Label" parent="Node"]
+unique_name_in_owner = true
+process_mode = 2
+offset_top = 96.0
+offset_right = 320.0
+offset_bottom = 168.0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_o7brr")
+dialogue = "Stage 1 Complete"
+metadata/_custom_type_script = "uid://cjk407wahqfjv"
+
+[node name="aceDialouge" type="Label" parent="Node/Win"]
+unique_name_in_owner = true
+process_mode = 2
+layout_mode = 0
+offset_left = 105.0
+offset_top = 348.0
+offset_right = 319.0
+offset_bottom = 443.0
+script = ExtResource("2_o7brr")
+dialogue = "Inital Defenses Breached,
+
+Beginning the Next Stage of the 
+operation."
+metadata/_custom_type_script = "uid://cjk407wahqfjv"
+
 [connection signal="timeout" from="AsteroidSpawner/AsteroidSpawn1" to="." method="_on_pirate_spawn_1_timeout"]
-[connection signal="finished" from="Stage 1 Timing/Win" to="." method="_on_win_finished"]
+[connection signal="finished" from="Node/Win" to="." method="_on_win_finished"]
+[connection signal="finished" from="Node/Win/aceDialouge" to="." method="_on_ace_dialouge_finished"]

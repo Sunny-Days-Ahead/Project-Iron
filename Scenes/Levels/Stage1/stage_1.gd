@@ -4,6 +4,7 @@ extends Node2D
 var newSpawn : Array[Marker2D]
 
 func _ready() -> void:
+	%Ace.hide()
 	print("Stage 1: Ready")
 	
 	# Populate the list of Enemy Spawn points
@@ -39,15 +40,15 @@ func spawnPFP():
 	newSpawn.pick_random().get_children()[0].add_child(newBomber)
 
 
-func pause():
+
+func stageEnd():
 	for child in Global.bullet_container.get_children():
-		print("i tried")
 		child.queue_free()
 	get_tree().paused = true
 	Global.player_node.hide()
-	get_tree().paused = false
 	%Win.show()
 	%Win.start()
+	
 	
 	
 #func spawnAlpha():           ##Depreciated##
@@ -70,4 +71,10 @@ func pause():
 
 
 func _on_win_finished() -> void:
+	%Win.hide()
+	%Ace.show()
+	%aceDialouge.show()
+	%aceDialouge.start()
+
+func _on_ace_dialouge_finished() -> void:
 	pass # Replace with function body.

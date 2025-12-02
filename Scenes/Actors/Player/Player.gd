@@ -18,7 +18,7 @@ func _ready() -> void:
 	# If we forgot to set the dash speed export, this is the fallback
 	if (dash_speed == 0):
 		dash_speed = speed * 2
-		
+
 	# initialize the HealthComponent
 
 	%HealthComponent.fullHeal()
@@ -26,39 +26,45 @@ func _ready() -> void:
 
 # _physics_process is where we put stuff that uses godot's physics system (it runs many times per frame).
 func _physics_process(_delta: float) -> void:
+	if %StateMachine.currentState != %stage:
+		return
+
 	velocity = direction * current_speed
 	move_and_slide()
-	
+
 # _process is where we put stuff that only needs to update once per frame.
 # Held inputs are good here, enemy logic, spawning things, etc.
 func _process(_delta: float) -> void:
+	if %StateMachine.currentState != %stage:
+		return
+
 	direction = Input.get_vector("moveLeft", "moveRight", "moveUp", "moveDown")
-	
+
 	if Input.is_action_pressed("shoot") == true:
 		# The spawner's spawn and try_spawn functions take an optional input, which is a Callable (function) that is executed with the spawned node as its parameter.
 		var bulletSpawned = %BulletSpawn.try_spawn(setup_bullet)
-		
+
 		if bulletSpawned:
 			%LaserSFX.playJitter()
-	
+
 	#This is essentially check the current value of health if it's x match x with the corrosponding animation
 	match %HealthComponent.currentHealth:
 		4:
 			ship.animation = "Full"
 		3:
-			ship.animation = "1DMG" 
+			ship.animation = "1DMG"
 		2:
 			ship.animation = "2DMG"
 		1:
 			ship.animation = "3DMG"
-			
-			
+
+
 # _input is run whenever we press or release a button.
 # Good for rising and falling edge stuff, not so good for held buttons or joysticks (that's why I put that in process)
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("speedUpHold") == true:
 		current_speed = dash_speed
-		
+
 	if event.is_action_released("speedUpHold") == true:
 		current_speed = speed
 

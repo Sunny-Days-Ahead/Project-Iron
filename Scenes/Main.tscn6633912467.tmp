@@ -1,6 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://kpqmljsmcfrv"]
+[gd_scene load_steps=19 format=3 uid="uid://kpqmljsmcfrv"]
 
+[ext_resource type="Script" uid="uid://dumngckmby8mo" path="res://Scenes/main.gd" id="1_kln2b"]
 [ext_resource type="PackedScene" uid="uid://sc7cdfed8olm" path="res://Scenes/Actors/Player/Player.tscn" id="2_kln2b"]
+[ext_resource type="Script" uid="uid://cfywxakmer1g3" path="res://Scenes/stagecontroller.gd" id="3_4kpch"]
 [ext_resource type="PackedScene" uid="uid://cq1mihhdvy4ge" path="res://Scenes/Other/scrolling_purple_space_background.tscn" id="4_rgh2o"]
 [ext_resource type="Script" uid="uid://1qs36werbe8o" path="res://Scenes/UI/score.gd" id="4_v1gob"]
 [ext_resource type="Texture2D" uid="uid://b7ommsejp8j8u" path="res://Assets/portrait/Commander_Portrait.png" id="7_4kpch"]
@@ -9,7 +11,6 @@
 [ext_resource type="Script" uid="uid://cv6wgnyjde582" path="res://Components/AudioJitterPlayer.gd" id="10_1p5hy"]
 [ext_resource type="Script" uid="uid://b8n8kdchxjfng" path="res://Components/StateMachine.gd" id="12_grg3l"]
 [ext_resource type="Script" uid="uid://b08v8gwfw25py" path="res://Scenes/stage.gd" id="13_1p5hy"]
-[ext_resource type="Script" uid="uid://df0wkx0cgw8x2" path="res://Scenes/gameover.gd" id="14_1p5hy"]
 [ext_resource type="Script" uid="uid://cxgogrwp6w8ro" path="res://Scenes/paused.gd" id="14_h1m7h"]
 [ext_resource type="Script" uid="uid://cku8ukbdttkql" path="res://Scenes/main_menu.gd" id="15_erwvk"]
 [ext_resource type="Script" uid="uid://i8bgsjjdlqik" path="res://Scenes/mission_brief.gd" id="15_h1m7h"]
@@ -29,13 +30,14 @@ normal = Vector2(-1, 0)
 distance = -320.0
 
 [node name="Main" type="Node"]
+script = ExtResource("1_kln2b")
 
 [node name="Scrolling Purple Space Background" parent="." instance=ExtResource("4_rgh2o")]
-unique_name_in_owner = true
 process_mode = 3
 
 [node name="Stage" type="Node" parent="."]
 unique_name_in_owner = true
+script = ExtResource("3_4kpch")
 
 [node name="Bullets" type="Node" parent="."]
 unique_name_in_owner = true
@@ -282,8 +284,6 @@ text = "Restart"
 [node name="PauseMenu" type="Node" parent="UI"]
 
 [node name="PMUI" type="Control" parent="UI/PauseMenu"]
-unique_name_in_owner = true
-process_mode = 2
 visible = false
 layout_mode = 3
 anchors_preset = 0
@@ -322,14 +322,12 @@ layout_mode = 2
 text = "Main Menu "
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
-unique_name_in_owner = true
 process_mode = 3
 script = ExtResource("12_grg3l")
 initialState = NodePath("mainMenu")
 metadata/_custom_type_script = "uid://b8n8kdchxjfng"
 
 [node name="stage" type="Node" parent="StateMachine"]
-unique_name_in_owner = true
 script = ExtResource("13_1p5hy")
 metadata/_custom_type_script = "uid://cu5j8q5xp1nm4"
 
@@ -346,10 +344,6 @@ script = ExtResource("15_h1m7h")
 speechList = [NodePath("../../UI/mission brief/Commander1"), NodePath("../../UI/mission brief/Commander2"), NodePath("../../UI/mission brief/Commander3"), NodePath("../../UI/mission brief/Commander4"), NodePath("../../UI/mission brief/Commander5")]
 metadata/_custom_type_script = "uid://cu5j8q5xp1nm4"
 
-[node name="gameover" type="Node" parent="StateMachine"]
-script = ExtResource("14_1p5hy")
-metadata/_custom_type_script = "uid://cu5j8q5xp1nm4"
-
 [connection signal="PlayerDeath" from="Player" to="StateMachine/stage" method="_on_player_player_death"]
 [connection signal="finished" from="UI/mission brief/Commander1" to="StateMachine/missionBrief" method="_on_speech_finished"]
 [connection signal="finished" from="UI/mission brief/Commander2" to="StateMachine/missionBrief" method="_on_speech_finished"]
@@ -360,7 +354,5 @@ metadata/_custom_type_script = "uid://cu5j8q5xp1nm4"
 [connection signal="pressed" from="UI/Main Menu/MMUI/marginC/vertiButtons/Mission Briefing" to="StateMachine/mainMenu" method="_on_main_menu_start_mission_brief"]
 [connection signal="pressed" from="UI/Main Menu/MMUI/marginC/vertiButtons/Begin Mission" to="StateMachine/mainMenu" method="_on_main_menu_start_game"]
 [connection signal="pressed" from="UI/Main Menu/MMUI/marginC/vertiButtons/Exit" to="StateMachine/mainMenu" method="_on_exit_pressed"]
-[connection signal="pressed" from="UI/Main Menu/MMUI/marginC/vertiButtons/debug" to="StateMachine/mainMenu" method="_on_debug_pressed"]
-[connection signal="pressed" from="UI/Game Over/GOUI/GOContainer/Restart" to="StateMachine/gameover" method="_on_restart_pressed"]
-[connection signal="pressed" from="UI/PauseMenu/PMUI/MarginContainer/VBoxContainer/Button2" to="StateMachine/paused" method="_on_button_2_pressed"]
-[connection signal="pressed" from="UI/PauseMenu/PMUI/MarginContainer/VBoxContainer/Button" to="StateMachine/paused" method="_on_button_pressed"]
+[connection signal="pressed" from="UI/Main Menu/MMUI/marginC/vertiButtons/debug" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="UI/Game Over/GOUI/GOContainer/Restart" to="." method="_on_restart_pressed"]
