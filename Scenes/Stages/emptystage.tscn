@@ -1,9 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://npki6naf5c1"]
+[gd_scene load_steps=9 format=3 uid="uid://npki6naf5c1"]
 
 [ext_resource type="Script" uid="uid://cg8a2f8p4b35m" path="res://Scenes/Stages/stage.gd" id="1_3byof"]
 [ext_resource type="Texture2D" uid="uid://cks2e0pax131i" path="res://Assets/Backgrounds/PHPurple/T_PurpleBackground_Version1_Layer1.png" id="1_q65fa"]
 [ext_resource type="Texture2D" uid="uid://cc7b5nq74k4tf" path="res://Assets/Backgrounds/PHPurple/T_PurpleBackground_Version1_Layer3.png" id="2_3byof"]
 [ext_resource type="Texture2D" uid="uid://s2r28bnjjad8" path="res://Assets/Backgrounds/PHPurple/T_PurpleBackground_Version1_Layer4.png" id="3_v85ke"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3byof"]
+distance = -540.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_v85ke"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_2icx3"]
+normal = Vector2(0, 1)
+distance = 375.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_2jqtu"]
+normal = Vector2(-1, 0)
+distance = -320.0
 
 [node name="Stage" type="Node" node_paths=PackedStringArray("enemy_container", "bullet_container") groups=["stages"]]
 script = ExtResource("1_3byof")
@@ -44,6 +58,24 @@ scale = Vector2(0.157, 0.157)
 texture = ExtResource("3_v85ke")
 
 [node name="Pre-Stage" type="Node" parent="."]
+
+[node name="Player Boundries" type="Node" parent="."]
+
+[node name="Boundaries" type="StaticBody2D" parent="Player Boundries"]
+visible = false
+collision_layer = 16
+
+[node name="Bottom" type="CollisionShape2D" parent="Player Boundries/Boundaries"]
+shape = SubResource("WorldBoundaryShape2D_3byof")
+
+[node name="Left" type="CollisionShape2D" parent="Player Boundries/Boundaries"]
+shape = SubResource("WorldBoundaryShape2D_v85ke")
+
+[node name="Top" type="CollisionShape2D" parent="Player Boundries/Boundaries"]
+shape = SubResource("WorldBoundaryShape2D_2icx3")
+
+[node name="Right" type="CollisionShape2D" parent="Player Boundries/Boundaries"]
+shape = SubResource("WorldBoundaryShape2D_2jqtu")
 
 [node name="Containers" type="Node" parent="."]
 
