@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=3 uid="uid://clpukeelob8bv"]
+
+[ext_resource type="PackedScene" uid="uid://b2hxbrt0ouhua" path="res://Scenes/Menus/MainMenu/main_menu.tscn" id="1_0hagd"]
+[ext_resource type="Script" uid="uid://cayuyshsawfb2" path="res://Scenes/Menus/menus.gd" id="1_8k4y7"]
+[ext_resource type="PackedScene" uid="uid://b32ss00awmfnd" path="res://Scenes/Menus/GameOver/game_over.tscn" id="2_yciej"]
+[ext_resource type="PackedScene" uid="uid://bu7ablqgkb8e" path="res://Scenes/Menus/Pause/pause_menu.tscn" id="3_0yfu1"]
+[ext_resource type="Script" uid="uid://bnuyec0xe7i0k" path="res://Components/StateMachine/StateMachine.gd" id="4_0yfu1"]
+[ext_resource type="Script" uid="uid://ccdqrnvfl6bw" path="res://Scenes/Menus/States/none.gd" id="5_8ovod"]
+[ext_resource type="Script" uid="uid://cvlj0soip8awn" path="res://Scenes/Menus/States/main_menu.gd" id="7_rq2ki"]
+[ext_resource type="Script" uid="uid://bquwqhsdho4m4" path="res://Scenes/Menus/States/game_over.gd" id="8_673os"]
+[ext_resource type="Script" uid="uid://dd7nolxgp5hk6" path="res://Scenes/Menus/States/paused.gd" id="9_ak8c2"]
+[ext_resource type="PackedScene" uid="uid://npki6naf5c1" path="res://Scenes/Stages/emptystage.tscn" id="10_rq2ki"]
+
+[node name="Menus" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8k4y7")
+
+[node name="MainMenu" parent="." instance=ExtResource("1_0hagd")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="GameOver" parent="." instance=ExtResource("2_yciej")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="PauseMenu" parent="." instance=ExtResource("3_0yfu1")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+unique_name_in_owner = true
+script = ExtResource("4_0yfu1")
+initial_state = NodePath("MainMenu")
+metadata/_custom_type_script = "uid://bnuyec0xe7i0k"
+
+[node name="None" type="Node" parent="StateMachine"]
+script = ExtResource("5_8ovod")
+state_name = "none"
+metadata/_custom_type_script = "uid://xmr3p4wrraye"
+
+[node name="MainMenu" type="Node" parent="StateMachine" node_paths=PackedStringArray("menuContainer")]
+script = ExtResource("7_rq2ki")
+menuContainer = NodePath("../..")
+state_name = "mainmenu"
+metadata/_custom_type_script = "uid://xmr3p4wrraye"
+
+[node name="GameOver" type="Node" parent="StateMachine"]
+script = ExtResource("8_673os")
+state_name = "gameover"
+metadata/_custom_type_script = "uid://xmr3p4wrraye"
+
+[node name="Paused" type="Node" parent="StateMachine"]
+script = ExtResource("9_ak8c2")
+menu_stage = ExtResource("10_rq2ki")
+state_name = "paused"
+metadata/_custom_type_script = "uid://xmr3p4wrraye"
+
+[connection signal="exitGame" from="MainMenu" to="." method="_onExitGame"]
+[connection signal="startGame" from="MainMenu" to="StateMachine/MainMenu" method="_on_main_menu_start_game"]
+[connection signal="ExitGame" from="GameOver" to="." method="_onExitGame"]
+[connection signal="ExitGame" from="PauseMenu" to="." method="_onExitGame"]
+[connection signal="MainMenu" from="PauseMenu" to="StateMachine/Paused" method="_main_menu_pressed"]
+[connection signal="Unpause" from="PauseMenu" to="StateMachine/Paused" method="unpause"]

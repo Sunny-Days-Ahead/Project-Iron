@@ -1,0 +1,109 @@
+[gd_scene load_steps=15 format=3 uid="uid://sc7cdfed8olm"]
+
+[ext_resource type="Texture2D" uid="uid://cq5gpay6frarh" path="res://Entites/Player/Assets/Player Ship Full HP.png" id="2_1p3rw"]
+[ext_resource type="Texture2D" uid="uid://b3jkaogbdq33l" path="res://Entites/Player/Assets/Player Ship 3 HP.png" id="2_j1qpo"]
+[ext_resource type="Script" uid="uid://djvxgjtgk6qfl" path="res://Entites/Player/Player.gd" id="2_kne1u"]
+[ext_resource type="Texture2D" uid="uid://s433uoxy2ayj" path="res://Entites/Player/Assets/Player Ship 2 HP.png" id="3_6tggy"]
+[ext_resource type="Script" uid="uid://dr061mb2blql5" path="res://Components/HealthComponent/HealthComponent.gd" id="3_akrb1"]
+[ext_resource type="Script" uid="uid://bdg5jx5fvubn7" path="res://Components/HurtBox/HurtBox.gd" id="4_26xe5"]
+[ext_resource type="Texture2D" uid="uid://de7hdjjy38iwv" path="res://Entites/Player/Assets/Player Ship 1 HP.png" id="4_bhfuo"]
+[ext_resource type="Script" uid="uid://cb6dui2kparaa" path="res://Components/Spawner/Spawner.gd" id="5_4fuvf"]
+[ext_resource type="PackedScene" uid="uid://k6phmbhftrdq" path="res://Entites/Projectiles/Bullet.tscn" id="6_6q7nd"]
+[ext_resource type="AudioStream" uid="uid://dtgge4ev075so" path="res://Assets/SFX/laserSmall_000.ogg" id="7_rplui"]
+[ext_resource type="Script" uid="uid://d2pkkuplbw4jd" path="res://Components/HitBox/HitBox.gd" id="8_6tggy"]
+[ext_resource type="Script" uid="uid://b58ihqv1rodbr" path="res://Components/AudioJitterPlayer/AudioJitterPlayer.gd" id="8_ut0tw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_th2x0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_j1qpo")
+}],
+"loop": true,
+"name": &"1DMG",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_6tggy")
+}],
+"loop": true,
+"name": &"2DMG",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_bhfuo")
+}],
+"loop": true,
+"name": &"3DMG",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_1p3rw")
+}],
+"loop": true,
+"name": &"Full",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e80uo"]
+size = Vector2(30, 26)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("ship") groups=["Player"]]
+texture_filter = 1
+collision_mask = 16
+script = ExtResource("2_kne1u")
+ship = NodePath("Ship")
+
+[node name="Ship" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_th2x0")
+animation = &"Full"
+
+[node name="BodyShape" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_e80uo")
+debug_color = Color(0.93473625, 0.25693136, 0, 0.41960785)
+
+[node name="HealthComponent" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_akrb1")
+maxHealth = 4
+metadata/_custom_type_script = "uid://dr061mb2blql5"
+
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_mask = 44
+script = ExtResource("4_26xe5")
+health = NodePath("../HealthComponent")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HurtBox"]
+polygon = PackedVector2Array(0, -12, -4, -6, -4, -3, -14, 6, -14, 10, -4, 5, -2, 12, 2, 12, 4, 5, 14, 10, 14, 5, 5, -3, 5, -6)
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_mask = 4
+script = ExtResource("8_6tggy")
+damage = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HitBox"]
+visible = false
+polygon = PackedVector2Array(0, -12, -4, -6, -4, -3, -14, 6, -14, 10, -4, 5, -2, 12, 2, 12, 4, 5, 14, 10, 14, 5, 5, -3, 5, -6)
+
+[node name="BulletSpawnPosition" type="Marker2D" parent="."]
+position = Vector2(0, -13)
+
+[node name="BulletSpawn" type="Timer" parent="." node_paths=PackedStringArray("spawnPosition")]
+unique_name_in_owner = true
+wait_time = 0.2
+script = ExtResource("5_4fuvf")
+sceneToSpawn = ExtResource("6_6q7nd")
+spawnPosition = NodePath("../BulletSpawnPosition")
+
+[node name="LaserSFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("7_rplui")
+script = ExtResource("8_ut0tw")
+jitter = 0.2
+
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

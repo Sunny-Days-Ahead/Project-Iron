@@ -1,0 +1,95 @@
+[gd_scene load_steps=14 format=3 uid="uid://cqjar1pvh3fqv"]
+
+[ext_resource type="PackedScene" uid="uid://bqfvmwpbprnx2" path="res://Entites/Enemies/SeekerPirate/seeker_pirate.tscn" id="1_0s201"]
+[ext_resource type="Texture2D" uid="uid://b1do6dkftnx04" path="res://Entites/Enemies/Asteroid/asteroid1Base.png" id="2_8da8i"]
+[ext_resource type="Script" path="res://Entites/Enemies/Asteroid/asteroid.gd" id="2_60ikl"]
+[ext_resource type="Texture2D" uid="uid://chixygpv4hwsc" path="res://Entites/Enemies/Asteroid/asteroid1Explode.png" id="3_omr0m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60ikl"]
+atlas = ExtResource("3_omr0m")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5lrxa"]
+atlas = ExtResource("3_omr0m")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2rg6s"]
+atlas = ExtResource("3_omr0m")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mflvi"]
+atlas = ExtResource("3_omr0m")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qcdmx"]
+atlas = ExtResource("3_omr0m")
+region = Rect2(384, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhbyd"]
+atlas = ExtResource("3_omr0m")
+region = Rect2(480, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o66gf"]
+atlas = ExtResource("3_omr0m")
+region = Rect2(576, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_55uvb"]
+atlas = ExtResource("3_omr0m")
+region = Rect2(672, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d0wpv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_60ikl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5lrxa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2rg6s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mflvi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qcdmx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lhbyd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o66gf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_55uvb")
+}],
+"loop": false,
+"name": &"default",
+"speed": 14.0
+}]
+
+[node name="Asteroid" instance=ExtResource("1_0s201")]
+script = ExtResource("2_60ikl")
+dropChance = 0.05
+
+[node name="Sprite2D" parent="." index="0"]
+unique_name_in_owner = true
+texture = ExtResource("2_8da8i")
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2(0.5, 0.5)
+
+[node name="HurtBox" parent="." index="3"]
+collision_mask = 11
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(0.5, 0.5)
+
+[node name="Explodes" type="AnimatedSprite2D" parent="." index="5"]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_d0wpv")
+frame = 7
+frame_progress = 1.0
+
+[connection signal="animation_finished" from="Explodes" to="." method="_on_explodes_animation_finished"]

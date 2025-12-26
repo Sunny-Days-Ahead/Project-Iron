@@ -1,0 +1,87 @@
+[gd_scene load_steps=5 format=3 uid="uid://npki6naf5c1"]
+
+[ext_resource type="Script" uid="uid://cg8a2f8p4b35m" path="res://Scenes/Stages/stage.gd" id="1_3byof"]
+[ext_resource type="Texture2D" uid="uid://cks2e0pax131i" path="res://Assets/Backgrounds/PHPurple/T_PurpleBackground_Version1_Layer1.png" id="1_q65fa"]
+[ext_resource type="Texture2D" uid="uid://cc7b5nq74k4tf" path="res://Assets/Backgrounds/PHPurple/T_PurpleBackground_Version1_Layer3.png" id="2_3byof"]
+[ext_resource type="Texture2D" uid="uid://s2r28bnjjad8" path="res://Assets/Backgrounds/PHPurple/T_PurpleBackground_Version1_Layer4.png" id="3_v85ke"]
+
+[node name="Stage" type="Node" node_paths=PackedStringArray("enemy_container", "bullet_container") groups=["stages"]]
+script = ExtResource("1_3byof")
+enemy_container = NodePath("Containers/Enemies")
+bullet_container = NodePath("Containers/Bullets")
+
+[node name="BGParallax" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="Background1px" type="Parallax2D" parent="BGParallax"]
+repeat_size = Vector2(0, 576)
+autoscroll = Vector2(0, 1.5)
+repeat_times = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="BGParallax/Background1px"]
+position = Vector2(160, 256)
+scale = Vector2(0.157, 0.157)
+texture = ExtResource("1_q65fa")
+
+[node name="Background10px" type="Parallax2D" parent="BGParallax"]
+repeat_size = Vector2(0, 576)
+autoscroll = Vector2(0, 10)
+repeat_times = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="BGParallax/Background10px"]
+position = Vector2(160, 256)
+scale = Vector2(0.157, 0.157)
+texture = ExtResource("2_3byof")
+
+[node name="Parallax2D" type="Parallax2D" parent="BGParallax"]
+repeat_size = Vector2(0, 576)
+autoscroll = Vector2(0, 20)
+repeat_times = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="BGParallax/Parallax2D"]
+position = Vector2(160, 256)
+scale = Vector2(0.157, 0.157)
+texture = ExtResource("3_v85ke")
+
+[node name="Pre-Stage" type="Node" parent="."]
+
+[node name="Containers" type="Node" parent="."]
+
+[node name="Bullets" type="Node" parent="Containers"]
+
+[node name="Enemies" type="Node" parent="Containers"]
+
+[node name="Spawners" type="Node" parent="Containers/Enemies"]
+
+[node name="AsteroidSpawner" type="Path2D" parent="Containers/Enemies/Spawners"]
+position = Vector2(-1, -30)
+
+[node name="AsteroidSpawn1" type="Timer" parent="Containers/Enemies/Spawners/AsteroidSpawner"]
+autostart = true
+
+[node name="AsteroidSpawnPoint" type="PathFollow2D" parent="Containers/Enemies/Spawners/AsteroidSpawner"]
+unique_name_in_owner = true
+position = Vector2(42.335934, 0)
+progress = 41.344
+
+[node name="SpawnPoints" type="Node" parent="Containers/Enemies/Spawners"]
+unique_name_in_owner = true
+
+[node name="Point1" type="Marker2D" parent="Containers/Enemies/Spawners/SpawnPoints"]
+position = Vector2(-23, 45)
+
+[node name="SpawnPath" type="Path2D" parent="Containers/Enemies/Spawners/SpawnPoints/Point1"]
+
+[node name="Point2" type="Marker2D" parent="Containers/Enemies/Spawners/SpawnPoints"]
+position = Vector2(-23, 90)
+
+[node name="SpawnPath" type="Path2D" parent="Containers/Enemies/Spawners/SpawnPoints/Point2"]
+
+[node name="Point3" type="Marker2D" parent="Containers/Enemies/Spawners/SpawnPoints"]
+position = Vector2(-23, 135)
+
+[node name="SpawnPath" type="Path2D" parent="Containers/Enemies/Spawners/SpawnPoints/Point3"]
+
+[node name="Post-Stage" type="Node" parent="."]
+
+[node name="timing" type="AnimationPlayer" parent="."]

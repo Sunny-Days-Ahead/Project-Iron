@@ -1,0 +1,40 @@
+[gd_scene load_steps=9 format=3 uid="uid://ch67nwurkvihb"]
+
+[ext_resource type="PackedScene" uid="uid://npki6naf5c1" path="res://Scenes/Stages/emptystage.tscn" id="1_e4etg"]
+[ext_resource type="Curve2D" uid="uid://bp5ybcbgi1wya" path="res://Scenes/Stages/Stage 1/Asteroid.tres" id="2_1vwh8"]
+[ext_resource type="Curve2D" uid="uid://ccu64io8fungu" path="res://Scenes/Stages/Stage 1/Stage1SpawnPath1.tres" id="3_ttkr0"]
+[ext_resource type="Curve2D" uid="uid://wsmf4dbawb4t" path="res://Scenes/Stages/Stage 1/Stage1SpawnPath2.tres" id="4_s1aub"]
+[ext_resource type="Curve2D" uid="uid://beghsdjjvs4jy" path="res://Scenes/Stages/Stage 1/Stage1SpawnPath3.tres" id="5_dxqc3"]
+[ext_resource type="Animation" uid="uid://d1eft43hpnd67" path="res://Scenes/Stages/Stage 1/Stage1.res" id="6_wctoo"]
+[ext_resource type="PackedScene" uid="uid://sc7cdfed8olm" path="res://Entites/Player/Player.tscn" id="7_1vwh8"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3p307"]
+_data = {
+&"Stage1": ExtResource("6_wctoo")
+}
+
+[node name="Stage" instance=ExtResource("1_e4etg")]
+
+[node name="AsteroidSpawner" parent="Spawners" index="0"]
+curve = ExtResource("2_1vwh8")
+
+[node name="AsteroidSpawnPoint" parent="Spawners/AsteroidSpawner" index="1"]
+position = Vector2(36.32232, -21.461664)
+rotation = -0.5459853
+
+[node name="SpawnPath" parent="Spawners/Point1" index="0"]
+curve = ExtResource("3_ttkr0")
+
+[node name="SpawnPath" parent="Spawners/Point2" index="0"]
+curve = ExtResource("4_s1aub")
+
+[node name="SpawnPath" parent="Spawners/Point3" index="0"]
+curve = ExtResource("5_dxqc3")
+
+[node name="timing" parent="." index="5"]
+libraries = {
+&"": SubResource("AnimationLibrary_3p307")
+}
+
+[node name="Player" parent="." index="6" instance=ExtResource("7_1vwh8")]
+position = Vector2(170, 503)

@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://cle3sej472by8"]
+
+[ext_resource type="PackedScene" uid="uid://bqfvmwpbprnx2" path="res://Entites/Enemies/SeekerPirate/seeker_pirate.tscn" id="1_yrviu"]
+[ext_resource type="Script" uid="uid://d4lyxfp1iy7ja" path="res://Entites/Enemies/FighterHorizontal/fighterPirate.gd" id="2_xkjif"]
+[ext_resource type="Texture2D" uid="uid://c7v3nf30ip78k" path="res://Entites/Enemies/FighterHorizontal/fighterBase.png" id="3_qio7x"]
+[ext_resource type="Script" uid="uid://cb6dui2kparaa" path="res://Components/Spawner/Spawner.gd" id="4_jx6xd"]
+[ext_resource type="PackedScene" uid="uid://k6phmbhftrdq" path="res://Entites/Projectiles/Bullet.tscn" id="5_nqjns"]
+[ext_resource type="AudioStream" uid="uid://dtgge4ev075so" path="res://Assets/SFX/laserSmall_000.ogg" id="6_4ywvd"]
+[ext_resource type="Script" uid="uid://b58ihqv1rodbr" path="res://Components/AudioJitterPlayer/AudioJitterPlayer.gd" id="7_j4w2e"]
+
+[node name="fighterPirate" instance=ExtResource("1_yrviu")]
+script = ExtResource("2_xkjif")
+speed = 200.0
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("3_qio7x")
+
+[node name="FreeTimer" parent="." index="4"]
+wait_time = 1.5
+
+[node name="Spawner" type="Timer" parent="." index="5" node_paths=PackedStringArray("spawnPosition")]
+unique_name_in_owner = true
+wait_time = 0.333
+autostart = true
+script = ExtResource("4_jx6xd")
+sceneToSpawn = ExtResource("5_nqjns")
+spawnPosition = NodePath("../BulletSpawnPosition")
+autoSpawn = true
+
+[node name="BulletSFX" type="AudioStreamPlayer" parent="." index="6"]
+unique_name_in_owner = true
+stream = ExtResource("6_4ywvd")
+pitch_scale = 1.5
+script = ExtResource("7_j4w2e")
+jitter = 0.2
+basePitchScale = 1.5
+
+[node name="BulletSpawnPosition" type="Marker2D" parent="." index="7"]
+position = Vector2(-2, -8.742278e-08)
+rotation = 1.5707964
+
+[connection signal="spawned" from="Spawner" to="." method="_on_spawner_spawned"]
+[connection signal="timeout" from="Spawner" to="." method="_on_spawner_timeout"]

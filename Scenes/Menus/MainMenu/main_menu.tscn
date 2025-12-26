@@ -1,0 +1,59 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2hxbrt0ouhua"]
+
+[ext_resource type="Script" uid="uid://bn6ktp51o1aer" path="res://Scenes/Menus/MainMenu/main_menu.gd" id="1_yo6co"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yo6co")
+
+[node name="TitleContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 73.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 50
+
+[node name="Label" type="Label" parent="TitleContainer"]
+layout_mode = 2
+text = "Project Iron"
+horizontal_alignment = 1
+
+[node name="ButtonContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Buttons" type="VBoxContainer" parent="ButtonContainer"]
+layout_mode = 2
+
+[node name="MissionBriefing" type="Button" parent="ButtonContainer/Buttons"]
+layout_mode = 2
+text = "Mission Briefing"
+
+[node name="BeginMission" type="Button" parent="ButtonContainer/Buttons"]
+layout_mode = 2
+text = "Begin Mission"
+
+[node name="Exit" type="Button" parent="ButtonContainer/Buttons"]
+layout_mode = 2
+text = "Exit Game
+"
+
+[node name="Debug" type="Button" parent="ButtonContainer/Buttons"]
+layout_mode = 2
+text = "Debug Stage
+"
+
+[connection signal="pressed" from="ButtonContainer/Buttons/MissionBriefing" to="." method="_startBrief"]
+[connection signal="pressed" from="ButtonContainer/Buttons/BeginMission" to="." method="_startGame"]
+[connection signal="pressed" from="ButtonContainer/Buttons/Exit" to="." method="_exitGame"]
+[connection signal="pressed" from="ButtonContainer/Buttons/Debug" to="." method="_startDebug"]

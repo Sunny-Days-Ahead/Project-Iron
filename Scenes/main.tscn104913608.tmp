@@ -1,14 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://c206qrcej4j06"]
+[gd_scene load_steps=4 format=3 uid="uid://c206qrcej4j06"]
 
 [ext_resource type="Script" uid="uid://caoif2ba4dspq" path="res://Scenes/main.gd" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://npki6naf5c1" path="res://Scenes/Stages/emptystage.tscn" id="2_8gbba"]
 [ext_resource type="PackedScene" uid="uid://clpukeelob8bv" path="res://Scenes/Menus/menus.tscn" id="2_bo1nx"]
-[ext_resource type="PackedScene" uid="uid://ch67nwurkvihb" path="res://Scenes/Stages/Stage1/stage1.tscn" id="2_jjvhh"]
-[ext_resource type="PackedScene" uid="uid://yy8ji68ublhs" path="res://Scenes/game_ui.tscn" id="4_kry3j"]
 
 [node name="Main" type="Node" groups=["Main"]]
 script = ExtResource("1_jjgbg")
-firstStage = ExtResource("2_jjvhh")
 
 [node name="GameViewport" type="SubViewportContainer" parent="."]
 anchors_preset = 15
@@ -18,20 +15,21 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="SubViewport" type="SubViewport" parent="GameViewport"]
-unique_name_in_owner = true
 handle_input_locally = false
 size = Vector2i(320, 540)
 render_target_update_mode = 4
 
 [node name="Stage" parent="GameViewport/SubViewport" instance=ExtResource("2_8gbba")]
 
-[node name="GameUI" parent="." instance=ExtResource("4_kry3j")]
-unique_name_in_owner = true
-visible = false
+[node name="GameUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Menus" parent="." instance=ExtResource("2_bo1nx")]
 process_mode = 3
 
-[connection signal="score_updated" from="." to="GameUI" method="_on_main_score_updated"]
 [connection signal="gameQuit" from="Menus" to="." method="_on_menu_game_quit"]
-[connection signal="gameStart" from="Menus" to="." method="_on_menus_game_start"]

@@ -1,0 +1,64 @@
+[gd_scene load_steps=11 format=3 uid="uid://bqfvmwpbprnx2"]
+
+[ext_resource type="Script" uid="uid://d280xjc1fp5ae" path="res://Entites/Enemies/SeekerPirate/seekerPirate.gd" id="1_qgfqi"]
+[ext_resource type="Texture2D" uid="uid://cqsvv1e33bwup" path="res://Entites/Enemies/SeekerPirate/scoutBase.png" id="2_bjoob"]
+[ext_resource type="Script" uid="uid://dr061mb2blql5" path="res://Components/HealthComponent/HealthComponent.gd" id="3_eb8a4"]
+[ext_resource type="Script" uid="uid://d2pkkuplbw4jd" path="res://Components/HitBox/HitBox.gd" id="4_4pq78"]
+[ext_resource type="Script" uid="uid://bdg5jx5fvubn7" path="res://Components/HurtBox/HurtBox.gd" id="5_gjkcd"]
+[ext_resource type="Script" uid="uid://c72kw4hrdibfj" path="res://Components/FreeTimer/freeTimer.gd" id="6_fgxrr"]
+[ext_resource type="Script" uid="uid://cb6dui2kparaa" path="res://Components/Spawner/Spawner.gd" id="7_qui22"]
+[ext_resource type="PackedScene" uid="uid://dtjoes5yy3mpw" path="res://Entites/Projectiles/full_shield.tscn" id="8_anntq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0terq"]
+size = Vector2(39, 33)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_20nhy"]
+size = Vector2(39, 33)
+
+[node name="seekerPirate" type="Node2D"]
+script = ExtResource("1_qgfqi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_bjoob")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("3_eb8a4")
+maxHealth = 1
+metadata/_custom_type_script = "uid://dr061mb2blql5"
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("4_4pq78")
+damage = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_0terq")
+debug_color = Color(0.99018484, 0.09740683, 3.85046e-07, 0.41960785)
+
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("5_gjkcd")
+health = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_20nhy")
+
+[node name="FreeTimer" type="Timer" parent="."]
+wait_time = 25.0
+autostart = true
+script = ExtResource("6_fgxrr")
+
+[node name="pickupSpawn" type="Timer" parent="." node_paths=PackedStringArray("spawnPosition")]
+unique_name_in_owner = true
+script = ExtResource("7_qui22")
+sceneToSpawn = ExtResource("8_anntq")
+spawnPosition = NodePath("../Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, -8)
+
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
