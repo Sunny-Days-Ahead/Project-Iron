@@ -10,11 +10,12 @@
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3p307"]
 _data = {
-&"Stage1": ExtResource("6_wctoo")
+&"stage": ExtResource("6_wctoo")
 }
 
 [node name="Stage" instance=ExtResource("1_e4etg")]
 parallax_on_pause = false
+stageTitle = "Stage 1"
 
 [node name="AsteroidSpawner" parent="Containers/Enemies/Spawners" index="0"]
 curve = ExtResource("2_1vwh8")
@@ -32,11 +33,10 @@ curve = ExtResource("4_1vjxr")
 [node name="SpawnPath" parent="Containers/Enemies/Spawners/SpawnPoints/Point3" index="0"]
 curve = ExtResource("5_bf1r7")
 
-[node name="timing" parent="." index="4"]
+[node name="Player" parent="." index="5" instance=ExtResource("7_1vwh8")]
+position = Vector2(170, 503)
+
+[node name="timing" parent="." index="6"]
 libraries = {
 &"": SubResource("AnimationLibrary_3p307")
 }
-autoplay = "Stage1"
-
-[node name="Player" parent="." index="5" instance=ExtResource("7_1vwh8")]
-position = Vector2(170, 503)

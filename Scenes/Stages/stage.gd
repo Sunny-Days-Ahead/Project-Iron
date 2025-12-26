@@ -10,16 +10,24 @@ extends Node
 
 @export_category("Next Stage")
 @export var nextStage : PackedScene
+@export var stageTitle : String
 
 # List of Enemy Spawn points
 var newSpawn : Array[Marker2D]
 
+# Reference to the Game UI
+var gameUI: Control
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	gameUI = get_tree().get_first_node_in_group("game_ui")
+	gameUI.intro_finished.connect(_on_intro_finished)
+
 	if parallax_on_pause:
 		%BGParallax.process_mode = Node.PROCESS_MODE_ALWAYS
 	else:
 		%BGParallax.process_mode = Node.PROCESS_MODE_PAUSABLE
+
 # Populate the list of Enemy Spawn points
 	for child in %SpawnPoints.get_children():
 		if child is Marker2D:
@@ -55,3 +63,9 @@ func get_enemy_container() -> Node:
 	
 func get_bullet_container() -> Node:
 	return(bullet_container)
+
+func _on_intro_finished() -> void:
+	if %timing.get_animation_list().has("preroll"):
+		%timing.play("preroll")
+	else:
+		%timing.play("stage")

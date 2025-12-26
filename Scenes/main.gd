@@ -2,6 +2,7 @@ class_name Game
 extends Node
 
 signal score_updated
+signal stageChanged(newStage: Stage)
 
 @export_category("Stage Config")
 @export var firstStage : PackedScene
@@ -48,6 +49,7 @@ func changeStage(nextStage: PackedScene) -> void:
 	var newStage = nextStage.instantiate()
 	%SubViewport.add_child(newStage)
 	currentStage = newStage
+	stageChanged.emit(currentStage)
 
 func _on_menus_game_start() -> void:
 	loadNextStage()

@@ -26,6 +26,7 @@ window/stretch/scale_mode="integer"
 Main="Main Game Container"
 stages="levels"
 Player=""
+game_ui=""
 
 [input]
 

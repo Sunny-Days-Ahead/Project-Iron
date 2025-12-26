@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://npki6naf5c1"]
+[gd_scene load_steps=11 format=3 uid="uid://npki6naf5c1"]
 
 [ext_resource type="Script" uid="uid://cg8a2f8p4b35m" path="res://Scenes/Stages/stage.gd" id="1_3byof"]
 [ext_resource type="Texture2D" uid="uid://cks2e0pax131i" path="res://Assets/Backgrounds/PHPurple/T_PurpleBackground_Version1_Layer1.png" id="1_q65fa"]
@@ -18,6 +18,14 @@ distance = 375.0
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_2jqtu"]
 normal = Vector2(-1, 0)
 distance = -320.0
+
+[sub_resource type="Animation" id="Animation_3byof"]
+resource_name = "stage"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v85ke"]
+_data = {
+&"stage": SubResource("Animation_3byof")
+}
 
 [node name="Stage" type="Node" node_paths=PackedStringArray("enemy_container", "bullet_container") groups=["stages"]]
 script = ExtResource("1_3byof")
@@ -117,3 +125,7 @@ position = Vector2(-23, 135)
 [node name="Post-Stage" type="Node" parent="."]
 
 [node name="timing" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_v85ke")
+}
