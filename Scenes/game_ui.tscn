@@ -1,12 +1,47 @@
-[gd_scene load_steps=6 format=3 uid="uid://yy8ji68ublhs"]
+[gd_scene load_steps=9 format=3 uid="uid://yy8ji68ublhs"]
 
 [ext_resource type="Script" uid="uid://dl0nqsgys8pkb" path="res://Scenes/game_ui.gd" id="1_gek4i"]
+[ext_resource type="Texture2D" uid="uid://dqm5y7b8cdxxc" path="res://Assets/Astronaut_RetroPixel.png" id="2_xjnnq"]
+[ext_resource type="Script" uid="uid://c2hykjq14g50q" path="res://Components/SpeechLabel/SpeechLabel.gd" id="3_x63ue"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gek4i"]
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_qtdm5"]
-resource_name = "FlyBy"
+resource_name = "IntroFlyBy"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(2.928171, 1, 3.605001, 1),
+"update": 0,
+"values": [-400.0, 0.0, 0.0, 400.0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%StageStartUI/..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"showSelf"
+}, {
+"args": [],
+"method": &"hideSelf"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_gek4i"]
+resource_name = "OutroFlyBy"
 length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -55,7 +90,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jaalf"]
 _data = {
-&"FlyBy": SubResource("Animation_qtdm5"),
+&"IntroFlyBy": SubResource("Animation_qtdm5"),
+&"OutroFlyBy": SubResource("Animation_gek4i"),
 &"RESET": SubResource("Animation_sdlof")
 }
 
@@ -78,7 +114,7 @@ offset_right = -0.00012207031
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="StageStartUI"]
+[node name="StageFlyBy" type="VBoxContainer" parent="StageStartUI"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -86,16 +122,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control" type="Control" parent="StageStartUI/VBoxContainer"]
+[node name="TopSpacer" type="Control" parent="StageStartUI/StageFlyBy"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.25
 
-[node name="ColorRect" type="ColorRect" parent="StageStartUI/VBoxContainer"]
+[node name="ColorRect" type="ColorRect" parent="StageStartUI/StageFlyBy"]
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 
-[node name="stageX" type="Label" parent="StageStartUI/VBoxContainer/ColorRect"]
+[node name="stageX" type="Label" parent="StageStartUI/StageFlyBy/ColorRect"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -113,16 +149,58 @@ size_flags_horizontal = 4
 text = "Stage X"
 label_settings = SubResource("LabelSettings_gek4i")
 
-[node name="Control2" type="Control" parent="StageStartUI/VBoxContainer"]
+[node name="BottomSpacer" type="Control" parent="StageStartUI/StageFlyBy"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.75
 
-[node name="animator" type="AnimationPlayer" parent="StageStartUI"]
+[node name="FlyByAnimator" type="AnimationPlayer" parent="StageStartUI"]
 unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_jaalf")
 }
+
+[node name="StageDialogue" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="StageDialogue"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="StageDialogue/CenterContainer"]
+custom_minimum_size = Vector2(250, 65)
+layout_mode = 2
+
+[node name="AcePortrait" type="TextureRect" parent="StageDialogue/CenterContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_xjnnq")
+expand_mode = 2
+
+[node name="DialogueLabel" type="Label" parent="StageDialogue/CenterContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+autowrap_mode = 2
+script = ExtResource("3_x63ue")
+metadata/_custom_type_script = "uid://c2hykjq14g50q"
+
+[node name="HideDelay" type="Timer" parent="StageDialogue/CenterContainer/HBoxContainer/DialogueLabel"]
+unique_name_in_owner = true
+wait_time = 3.0
+one_shot = true
 
 [node name="Score" type="Label" parent="."]
 unique_name_in_owner = true
@@ -131,4 +209,4 @@ offset_right = 40.0
 offset_bottom = 23.0
 text = "Score: 0"
 
-[connection signal="animation_finished" from="StageStartUI/animator" to="." method="_on_animator_finished"]
+[connection signal="animation_finished" from="StageStartUI/FlyByAnimator" to="." method="_on_animator_finished"]

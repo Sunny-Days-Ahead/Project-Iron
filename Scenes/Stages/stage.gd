@@ -1,6 +1,8 @@
 class_name Stage
 extends Node
 
+signal stageComplete
+
 @export_category("Parallax Option")
 @export var parallax_on_pause: bool = true
 
@@ -8,20 +10,20 @@ extends Node
 @export var enemy_container: Node
 @export var bullet_container: Node
 
-@export_category("Next Stage")
+@export_category("Stage Info")
 @export var nextStage : PackedScene
 @export var stageTitle : String
+@export_multiline var prerollDialogue: String
+@export_multiline var postrollDialogue: String
 
-# List of Enemy Spawn points
-var newSpawn : Array[Marker2D]
+var newSpawn : Array[Marker2D]			# List of Enemy Spawn points
+var gameUI: GameUI						# Reference to the Game UI
 
-# Reference to the Game UI
-var gameUI: Control
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	gameUI = get_tree().get_first_node_in_group("game_ui")
 	gameUI.intro_finished.connect(_on_intro_finished)
+	gameUI.outro_finished.connect(_on_outro_finished)
+	gameUI.dialogue_finished.connect(_on_dialogue_finished)
 
 	if parallax_on_pause:
 		%BGParallax.process_mode = Node.PROCESS_MODE_ALWAYS
@@ -65,11 +67,18 @@ func get_bullet_container() -> Node:
 	return(bullet_container)
 
 func _on_intro_finished() -> void:
-	if %timing.get_animation_list().has("preroll"):
-		%timing.play("preroll")
-	else:
-		%timing.play("stage")
-
-
-func _on_pre_stage_preroll_finished() -> void:
+	gameUI.play_dialogue(prerollDialogue)
+	await gameUI.dialogue_finished
 	%timing.play("stage")
+
+func _on_outro_finished() -> void:
+	stageComplete.emit()
+
+func _on_dialogue_finished() -> void:
+	pass
+
+func _on_timing_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "stage":
+		gameUI.play_dialogue(postrollDialogue)
+		await gameUI.dialogue_finished
+		gameUI.play_outro()

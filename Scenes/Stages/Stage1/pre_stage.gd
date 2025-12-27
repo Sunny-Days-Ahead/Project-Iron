@@ -12,11 +12,9 @@ func hideSelf():
 	%SpeechBox.hide()
 	
 
-
 func _on_dialouge_finished() -> void:
 	%wait.start()
 	
-
 
 func _on_wait_timeout() -> void:
 	prerollFinished.emit()

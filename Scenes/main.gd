@@ -20,8 +20,6 @@ func _ready() -> void:
 	score = 0
 	currentStage = get_tree().get_first_node_in_group("stages")
 
-func _on_menu_game_quit() -> void:
-	get_tree().quit()
 
 func addScore(amount: int) -> void:
 	score += amount
@@ -49,14 +47,22 @@ func changeStage(nextStage: PackedScene) -> void:
 	var newStage = nextStage.instantiate()
 	%SubViewport.add_child(newStage)
 	currentStage = newStage
+	currentStage.stageComplete.connect(_on_stage_complete)
 	stageChanged.emit(currentStage)
-
-func _on_menus_game_start() -> void:
-	loadNextStage()
-	show_ui()
 
 func show_ui() -> void:
 	%GameUI.show()
 	
 func hide_ui() -> void:
 	%GameUI.hide()
+	
+
+func _on_menus_game_start() -> void:
+	loadNextStage()
+	show_ui()
+
+func _on_stage_complete() -> void:
+	loadNextStage()
+
+func _on_menu_game_quit() -> void:
+	get_tree().quit()
