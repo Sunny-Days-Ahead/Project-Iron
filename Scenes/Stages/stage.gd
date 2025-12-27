@@ -69,3 +69,7 @@ func _on_intro_finished() -> void:
 		%timing.play("preroll")
 	else:
 		%timing.play("stage")
+
+
+func _on_pre_stage_preroll_finished() -> void:
+	%timing.play("stage")

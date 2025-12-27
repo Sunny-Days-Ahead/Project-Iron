@@ -1,21 +1,89 @@
-[gd_scene load_steps=9 format=3 uid="uid://ch67nwurkvihb"]
+[gd_scene load_steps=13 format=3 uid="uid://ch67nwurkvihb"]
 
 [ext_resource type="PackedScene" uid="uid://npki6naf5c1" path="res://Scenes/Stages/emptystage.tscn" id="1_e4etg"]
 [ext_resource type="Curve2D" uid="uid://bp5ybcbgi1wya" path="res://Scenes/Stages/Stage1/Asteroid.tres" id="2_1vwh8"]
+[ext_resource type="Script" uid="uid://qmwjme3xboqi" path="res://Scenes/Stages/Stage1/pre_stage.gd" id="2_j8trq"]
+[ext_resource type="Texture2D" uid="uid://dqm5y7b8cdxxc" path="res://Assets/Astronaut_RetroPixel.png" id="3_hwcoo"]
 [ext_resource type="Curve2D" uid="uid://ccu64io8fungu" path="res://Scenes/Stages/Stage1/Stage1SpawnPath1.tres" id="3_u6gyn"]
 [ext_resource type="Curve2D" uid="uid://wsmf4dbawb4t" path="res://Scenes/Stages/Stage1/Stage1SpawnPath2.tres" id="4_1vjxr"]
+[ext_resource type="Script" uid="uid://c2hykjq14g50q" path="res://Components/SpeechLabel/SpeechLabel.gd" id="4_7aq3i"]
 [ext_resource type="Curve2D" uid="uid://beghsdjjvs4jy" path="res://Scenes/Stages/Stage1/Stage1SpawnPath3.tres" id="5_bf1r7"]
 [ext_resource type="Animation" uid="uid://d1eft43hpnd67" path="res://Scenes/Stages/Stage1/Stage1.res" id="6_wctoo"]
 [ext_resource type="PackedScene" uid="uid://sc7cdfed8olm" path="res://Entites/Player/Player.tscn" id="7_1vwh8"]
 
+[sub_resource type="Animation" id="Animation_u6gyn"]
+resource_name = "preroll"
+length = 5.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pre-Stage")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"showSelf"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3p307"]
 _data = {
+&"preroll": SubResource("Animation_u6gyn"),
 &"stage": ExtResource("6_wctoo")
 }
 
 [node name="Stage" instance=ExtResource("1_e4etg")]
 parallax_on_pause = false
 stageTitle = "Stage 1"
+
+[node name="Pre-Stage" parent="." index="1"]
+script = ExtResource("2_j8trq")
+
+[node name="Ace" type="TextureRect" parent="Pre-Stage" index="0"]
+unique_name_in_owner = true
+visible = false
+offset_left = 246.0
+offset_top = 212.99997
+offset_right = 1270.0
+offset_bottom = 1237.0
+scale = Vector2(0.07199189, 0.07199189)
+size_flags_horizontal = 0
+texture = ExtResource("3_hwcoo")
+
+[node name="SpeechBox" type="Control" parent="Pre-Stage" index="1"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="dialouge" type="Label" parent="Pre-Stage/SpeechBox" index="0"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -127.0
+offset_top = 211.0
+offset_right = 88.5
+offset_bottom = 277.0
+grow_horizontal = 2
+horizontal_alignment = 2
+script = ExtResource("4_7aq3i")
+dialogue = "I've reached the AO at the 
+edge of the asteroid belt
+Ace here, begining Stage 1"
+metadata/_custom_type_script = "uid://c2hykjq14g50q"
+
+[node name="wait" type="Timer" parent="Pre-Stage/SpeechBox/dialouge" index="0"]
+unique_name_in_owner = true
+wait_time = 3.0
 
 [node name="AsteroidSpawner" parent="Containers/Enemies/Spawners" index="0"]
 curve = ExtResource("2_1vwh8")
@@ -40,3 +108,7 @@ position = Vector2(170, 503)
 libraries = {
 &"": SubResource("AnimationLibrary_3p307")
 }
+
+[connection signal="prerollFinished" from="Pre-Stage" to="." method="_on_pre_stage_preroll_finished"]
+[connection signal="finished" from="Pre-Stage/SpeechBox/dialouge" to="Pre-Stage" method="_on_dialouge_finished"]
+[connection signal="timeout" from="Pre-Stage/SpeechBox/dialouge/wait" to="Pre-Stage" method="_on_wait_timeout"]

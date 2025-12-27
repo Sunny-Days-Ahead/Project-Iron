@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://dr061mb2blql5" path="res://Components/HealthComponent/HealthComponent.gd" id="6_2cdl2"]
 [ext_resource type="Script" uid="uid://cb6dui2kparaa" path="res://Components/Spawner/Spawner.gd" id="7_li2jx"]
 [ext_resource type="PackedScene" uid="uid://k6phmbhftrdq" path="res://Entites/Projectiles/Bullet.tscn" id="8_wkfss"]
-[ext_resource type="AudioStream" uid="uid://dtgge4ev075so" path="res://Assets/SFX/laserSmall_000.ogg" id="9_kgokx"]
+[ext_resource type="AudioStream" uid="uid://dtgge4ev075so" path="res://Entites/Assets/SFX/laserSmall_000.ogg" id="9_kgokx"]
 [ext_resource type="Script" uid="uid://b58ihqv1rodbr" path="res://Components/AudioJitterPlayer/AudioJitterPlayer.gd" id="10_se86h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0k4i6"]

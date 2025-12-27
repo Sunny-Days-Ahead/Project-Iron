@@ -21,6 +21,10 @@ window/size/viewport_height=540
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 
+[editor]
+
+movie_writer/movie_file="C:/Users/rjpoo/Desktop/Test.avi"
+
 [global_group]
 
 Main="Main Game Container"

@@ -20,3 +20,10 @@ func _on_main_stage_changed(newStage: Stage) -> void:
 
 func _on_animator_finished(_anim_name: StringName) -> void:
 	intro_finished.emit()
+
+
+func showSelf():
+	%StageStartUI.show()
+	
+func hideSelf():
+	%StageStartUI.hide()

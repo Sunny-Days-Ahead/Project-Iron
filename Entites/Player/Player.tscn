@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://de7hdjjy38iwv" path="res://Entites/Player/Assets/Player Ship 1 HP.png" id="4_bhfuo"]
 [ext_resource type="Script" uid="uid://cb6dui2kparaa" path="res://Components/Spawner/Spawner.gd" id="5_4fuvf"]
 [ext_resource type="PackedScene" uid="uid://k6phmbhftrdq" path="res://Entites/Projectiles/Bullet.tscn" id="6_6q7nd"]
-[ext_resource type="AudioStream" uid="uid://dtgge4ev075so" path="res://Assets/SFX/laserSmall_000.ogg" id="7_rplui"]
+[ext_resource type="AudioStream" uid="uid://dtgge4ev075so" path="res://Entites/Assets/SFX/laserSmall_000.ogg" id="7_rplui"]
 [ext_resource type="Script" uid="uid://d2pkkuplbw4jd" path="res://Components/HitBox/HitBox.gd" id="8_6tggy"]
 [ext_resource type="Script" uid="uid://b58ihqv1rodbr" path="res://Components/AudioJitterPlayer/AudioJitterPlayer.gd" id="8_ut0tw"]
 
