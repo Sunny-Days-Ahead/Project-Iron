@@ -17,6 +17,8 @@ var desiredRotation : float
 func _ready() -> void:
 	playerNode = get_tree().get_first_node_in_group("Player")
 	mainNode = get_tree().get_first_node_in_group("Main")
+	$Sprite2D.hide()
+	$self.animation = "default"
 	
 func _process(delta: float) -> void:
 	pass
@@ -33,8 +35,12 @@ func _process(delta: float) -> void:
 
 func _on_health_component_died() -> void:
 	mainNode.addScore(points)
-
+	$self.play("died")
 	if randf() <= dropChance:
 		$pickupSpawn.spawn()
 	
+
+
+func _on_ship_animation_finished() -> void:
+	print("ship died")
 	queue_free()

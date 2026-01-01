@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bqfvmwpbprnx2"]
+[gd_scene load_steps=19 format=3 uid="uid://bqfvmwpbprnx2"]
 
 [ext_resource type="Script" uid="uid://d280xjc1fp5ae" path="res://Entites/Enemies/SeekerPirate/seekerPirate.gd" id="1_qgfqi"]
 [ext_resource type="Texture2D" uid="uid://cqsvv1e33bwup" path="res://Entites/Enemies/SeekerPirate/scoutBase.png" id="2_bjoob"]
@@ -8,6 +8,68 @@
 [ext_resource type="Script" uid="uid://c72kw4hrdibfj" path="res://Components/FreeTimer/freeTimer.gd" id="6_fgxrr"]
 [ext_resource type="Script" uid="uid://cb6dui2kparaa" path="res://Components/Spawner/Spawner.gd" id="7_qui22"]
 [ext_resource type="PackedScene" uid="uid://dtjoes5yy3mpw" path="res://Entites/Projectiles/full_shield.tscn" id="8_anntq"]
+[ext_resource type="Texture2D" uid="uid://btdn5aojhjutn" path="res://Entites/Enemies/SeekerPirate/Explosion-Pack.png" id="9_804qp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2a7b4"]
+atlas = ExtResource("9_804qp")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5nidy"]
+atlas = ExtResource("9_804qp")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2n4tq"]
+atlas = ExtResource("9_804qp")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqyma"]
+atlas = ExtResource("9_804qp")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n16at"]
+atlas = ExtResource("9_804qp")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3mloq"]
+atlas = ExtResource("9_804qp")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_306h2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bjoob")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2a7b4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5nidy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2n4tq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qqyma")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n16at")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3mloq")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"died",
+"speed": 14.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0terq"]
 size = Vector2(39, 33)
@@ -17,6 +79,13 @@ size = Vector2(39, 33)
 
 [node name="seekerPirate" type="Node2D"]
 script = ExtResource("1_qgfqi")
+
+[node name="self" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_306h2")
+animation = &"died"
+autoplay = "default"
+frame = 6
+frame_progress = 1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_bjoob")
@@ -61,4 +130,5 @@ spawnPosition = NodePath("../Marker2D")
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(0, -8)
 
+[connection signal="animation_finished" from="self" to="." method="_on_ship_animation_finished"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

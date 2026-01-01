@@ -65,6 +65,7 @@ metadata/_custom_type_script = "uid://xmr3p4wrraye"
 [connection signal="exitGame" from="MainMenu" to="." method="_onExitGame"]
 [connection signal="startGame" from="MainMenu" to="StateMachine/MainMenu" method="_on_main_menu_start_game"]
 [connection signal="ExitGame" from="GameOver" to="." method="_onExitGame"]
+[connection signal="RestartStage" from="GameOver" to="." method="_on_game_over_restart_stage"]
 [connection signal="ExitGame" from="PauseMenu" to="." method="_onExitGame"]
 [connection signal="MainMenu" from="PauseMenu" to="StateMachine/Paused" method="_main_menu_pressed"]
 [connection signal="Unpause" from="PauseMenu" to="StateMachine/Paused" method="unpause"]

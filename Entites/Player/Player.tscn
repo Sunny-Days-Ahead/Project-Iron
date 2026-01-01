@@ -1,23 +1,79 @@
-[gd_scene load_steps=15 format=3 uid="uid://sc7cdfed8olm"]
+[gd_scene load_steps=29 format=3 uid="uid://sc7cdfed8olm"]
 
-[ext_resource type="Texture2D" uid="uid://cq5gpay6frarh" path="res://Entites/Player/Assets/Player Ship Full HP.png" id="2_1p3rw"]
-[ext_resource type="Texture2D" uid="uid://b3jkaogbdq33l" path="res://Entites/Player/Assets/Player Ship 3 HP.png" id="2_j1qpo"]
 [ext_resource type="Script" uid="uid://djvxgjtgk6qfl" path="res://Entites/Player/Player.gd" id="2_kne1u"]
-[ext_resource type="Texture2D" uid="uid://s433uoxy2ayj" path="res://Entites/Player/Assets/Player Ship 2 HP.png" id="3_6tggy"]
+[ext_resource type="Texture2D" uid="uid://drui6y1i6keoi" path="res://Entites/Player/Assets/1DMGPlayer Ship-Sheet.png" id="2_nipf8"]
+[ext_resource type="Texture2D" uid="uid://go6ewgbi7st3" path="res://Entites/Player/Assets/2DMGPlayer Ship-Sheet.png" id="3_47k2u"]
+[ext_resource type="Texture2D" uid="uid://b5nfq0c1fkdya" path="res://Entites/Player/Assets/Player Ship1.png" id="3_84uim"]
 [ext_resource type="Script" uid="uid://dr061mb2blql5" path="res://Components/HealthComponent/HealthComponent.gd" id="3_akrb1"]
 [ext_resource type="Script" uid="uid://bdg5jx5fvubn7" path="res://Components/HurtBox/HurtBox.gd" id="4_26xe5"]
-[ext_resource type="Texture2D" uid="uid://de7hdjjy38iwv" path="res://Entites/Player/Assets/Player Ship 1 HP.png" id="4_bhfuo"]
+[ext_resource type="Texture2D" uid="uid://dggek8rk2fbwr" path="res://Entites/Player/Assets/3DMGPlayer Ship-Sheet.png" id="4_fghmp"]
+[ext_resource type="Texture2D" uid="uid://x4jhdwicyslb" path="res://Entites/Player/Assets/Player Ship2.png" id="4_jexi5"]
 [ext_resource type="Script" uid="uid://cb6dui2kparaa" path="res://Components/Spawner/Spawner.gd" id="5_4fuvf"]
+[ext_resource type="Texture2D" uid="uid://b8jvrow0qgbtn" path="res://Entites/Player/Assets/Player Ship3.png" id="5_nipf8"]
 [ext_resource type="PackedScene" uid="uid://k6phmbhftrdq" path="res://Entites/Projectiles/Bullet.tscn" id="6_6q7nd"]
 [ext_resource type="AudioStream" uid="uid://dtgge4ev075so" path="res://Assets/SFX/laserSmall_000.ogg" id="7_rplui"]
 [ext_resource type="Script" uid="uid://d2pkkuplbw4jd" path="res://Components/HitBox/HitBox.gd" id="8_6tggy"]
 [ext_resource type="Script" uid="uid://b58ihqv1rodbr" path="res://Components/AudioJitterPlayer/AudioJitterPlayer.gd" id="8_ut0tw"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_474gg"]
+atlas = ExtResource("2_nipf8")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aog2u"]
+atlas = ExtResource("2_nipf8")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_myqn0"]
+atlas = ExtResource("2_nipf8")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xhcbd"]
+atlas = ExtResource("3_47k2u")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hmprl"]
+atlas = ExtResource("3_47k2u")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r86b0"]
+atlas = ExtResource("3_47k2u")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_csnu3"]
+atlas = ExtResource("4_fghmp")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j5s86"]
+atlas = ExtResource("4_fghmp")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8yxvh"]
+atlas = ExtResource("4_fghmp")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_og3fv"]
+atlas = ExtResource("3_84uim")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xc1g6"]
+atlas = ExtResource("4_jexi5")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ltras"]
+atlas = ExtResource("5_nipf8")
+region = Rect2(0, 0, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_th2x0"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_j1qpo")
+"texture": SubResource("AtlasTexture_474gg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aog2u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_myqn0")
 }],
 "loop": true,
 "name": &"1DMG",
@@ -25,7 +81,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_6tggy")
+"texture": SubResource("AtlasTexture_xhcbd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hmprl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r86b0")
 }],
 "loop": true,
 "name": &"2DMG",
@@ -33,7 +95,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_bhfuo")
+"texture": SubResource("AtlasTexture_csnu3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j5s86")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8yxvh")
 }],
 "loop": true,
 "name": &"3DMG",
@@ -41,7 +109,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_1p3rw")
+"texture": SubResource("AtlasTexture_og3fv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xc1g6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ltras")
 }],
 "loop": true,
 "name": &"Full",
@@ -55,14 +129,16 @@ size = Vector2(30, 26)
 texture_filter = 1
 collision_mask = 16
 script = ExtResource("2_kne1u")
-speed = 300.0
-dash_speed = 600.0
+speed = 150.0
+dash_speed = 300.0
 ship = NodePath("Ship")
 
 [node name="Ship" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
+position = Vector2(0, 2)
 sprite_frames = SubResource("SpriteFrames_th2x0")
-animation = &"Full"
+animation = &"1DMG"
+autoplay = "Full"
 
 [node name="BodyShape" type="CollisionShape2D" parent="."]
 visible = false
@@ -81,7 +157,8 @@ script = ExtResource("4_26xe5")
 health = NodePath("../HealthComponent")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HurtBox"]
-polygon = PackedVector2Array(0, -12, -4, -6, -4, -3, -14, 6, -14, 10, -4, 5, -2, 12, 2, 12, 4, 5, 14, 10, 14, 5, 5, -3, 5, -6)
+position = Vector2(0, -2)
+polygon = PackedVector2Array(0, -14, -5, -3, -8, -2, -11, -12, -16, -7, -16, 12, -7, 12, -3, 14, 3, 14, 7, 12, 16, 12, 16, -6, 11, -12, 9, -2, 5, -3)
 
 [node name="HitBox" type="Area2D" parent="."]
 collision_mask = 4
@@ -97,7 +174,7 @@ position = Vector2(0, -13)
 
 [node name="BulletSpawn" type="Timer" parent="." node_paths=PackedStringArray("spawnPosition")]
 unique_name_in_owner = true
-wait_time = 0.2
+wait_time = 1.5
 script = ExtResource("5_4fuvf")
 sceneToSpawn = ExtResource("6_6q7nd")
 spawnPosition = NodePath("../BulletSpawnPosition")

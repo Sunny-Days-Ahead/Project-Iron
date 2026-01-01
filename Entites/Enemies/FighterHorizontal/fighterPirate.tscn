@@ -39,5 +39,7 @@ basePitchScale = 1.5
 position = Vector2(-2, -8.742278e-08)
 rotation = 1.5707964
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="10"]
+
 [connection signal="spawned" from="Spawner" to="." method="_on_spawner_spawned"]
 [connection signal="timeout" from="Spawner" to="." method="_on_spawner_timeout"]

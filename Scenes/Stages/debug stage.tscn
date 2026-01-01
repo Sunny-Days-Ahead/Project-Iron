@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://bm5xnqryfq31r"]
+
+[ext_resource type="PackedScene" uid="uid://npki6naf5c1" path="res://Scenes/Stages/emptystage.tscn" id="1_2tw0f"]
+[ext_resource type="PackedScene" uid="uid://sc7cdfed8olm" path="res://Entites/Player/Player.tscn" id="2_7pctg"]
+[ext_resource type="PackedScene" uid="uid://bqfvmwpbprnx2" path="res://Entites/Enemies/SeekerPirate/seeker_pirate.tscn" id="3_kbcuk"]
+
+[node name="Stage" instance=ExtResource("1_2tw0f")]
+
+[node name="Player" parent="." index="4" instance=ExtResource("2_7pctg")]
+position = Vector2(162, 502)
+
+[node name="seekerPirate" parent="." index="5" instance=ExtResource("3_kbcuk")]
+position = Vector2(163, 33)
