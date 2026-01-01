@@ -1,7 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bm5xnqryfq31r"]
+[gd_scene load_steps=10 format=3 uid="uid://bm5xnqryfq31r"]
 
 [ext_resource type="PackedScene" uid="uid://npki6naf5c1" path="res://Scenes/Stages/emptystage.tscn" id="1_prgop"]
 [ext_resource type="PackedScene" uid="uid://sc7cdfed8olm" path="res://Entites/Player/Player.tscn" id="2_2tw0f"]
+[ext_resource type="Texture2D" uid="uid://cdevfi3lw15wu" path="res://Assets/Backgrounds/paralax test.png" id="2_7pctg"]
+[ext_resource type="Texture2D" uid="uid://ikex5shgsybj" path="res://Assets/Backgrounds/paralax test2.png" id="3_7pctg"]
+[ext_resource type="Texture2D" uid="uid://2ash3akbpv6r" path="res://Assets/Backgrounds/paralax test3.png" id="4_kbcuk"]
+[ext_resource type="PackedScene" uid="uid://cqjar1pvh3fqv" path="res://Entites/Enemies/Asteroid/asteroid.tscn" id="5_gjen7"]
 
 [sub_resource type="Curve2D" id="Curve2D_7pctg"]
 _data = {
@@ -37,6 +41,27 @@ nextStage = ExtResource("1_prgop")
 stageTitle = "Debug Stage"
 prerollDialogue = "test dialouge"
 postrollDialogue = "test dialouge"
+
+[node name="Background1px" parent="BGParallax" index="0"]
+autoscroll = Vector2(0, 5)
+
+[node name="Sprite2D" parent="BGParallax/Background1px" index="0"]
+position = Vector2(160.94, 288.80496)
+scale = Vector2(1.000375, 1.0673888)
+texture = ExtResource("2_7pctg")
+
+[node name="Sprite2D" parent="BGParallax/Background10px" index="0"]
+position = Vector2(159.94, 288.305)
+scale = Vector2(0.99412507, 1.0618334)
+texture = ExtResource("3_7pctg")
+
+[node name="Sprite2D" parent="BGParallax/Parallax2D" index="0"]
+position = Vector2(160.5, 291.5)
+scale = Vector2(0.996875, 1.0685185)
+texture = ExtResource("4_kbcuk")
+
+[node name="Asteroid" parent="BGParallax/Parallax2D" index="1" instance=ExtResource("5_gjen7")]
+position = Vector2(127, 79)
 
 [node name="AsteroidSpawner" parent="Containers/Enemies/Spawners" index="0"]
 curve = SubResource("Curve2D_7pctg")

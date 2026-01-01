@@ -1,6 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://bqfvmwpbprnx2"]
+[gd_scene load_steps=23 format=3 uid="uid://bqfvmwpbprnx2"]
 
 [ext_resource type="Script" uid="uid://d280xjc1fp5ae" path="res://Entites/Enemies/SeekerPirate/seekerPirate.gd" id="1_qgfqi"]
+[ext_resource type="Texture2D" uid="uid://5ikt3phtjcoa" path="res://Entites/Enemies/SeekerPirate/scoutSheet.png" id="2_2a7b4"]
 [ext_resource type="Texture2D" uid="uid://cqsvv1e33bwup" path="res://Entites/Enemies/SeekerPirate/scoutBase.png" id="2_bjoob"]
 [ext_resource type="Script" uid="uid://dr061mb2blql5" path="res://Components/HealthComponent/HealthComponent.gd" id="3_eb8a4"]
 [ext_resource type="Script" uid="uid://d2pkkuplbw4jd" path="res://Components/HitBox/HitBox.gd" id="4_4pq78"]
@@ -9,6 +10,18 @@
 [ext_resource type="Script" uid="uid://cb6dui2kparaa" path="res://Components/Spawner/Spawner.gd" id="7_qui22"]
 [ext_resource type="PackedScene" uid="uid://dtjoes5yy3mpw" path="res://Entites/Projectiles/full_shield.tscn" id="8_anntq"]
 [ext_resource type="Texture2D" uid="uid://btdn5aojhjutn" path="res://Entites/Enemies/SeekerPirate/Explosion-Pack.png" id="9_804qp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_306h2"]
+atlas = ExtResource("2_2a7b4")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08jea"]
+atlas = ExtResource("2_2a7b4")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0b6d5"]
+atlas = ExtResource("2_2a7b4")
+region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2a7b4"]
 atlas = ExtResource("9_804qp")
@@ -38,11 +51,17 @@ region = Rect2(160, 32, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_bjoob")
+"texture": SubResource("AtlasTexture_306h2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08jea")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0b6d5")
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 9.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -82,12 +101,11 @@ script = ExtResource("1_qgfqi")
 
 [node name="self" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_306h2")
-animation = &"died"
 autoplay = "default"
-frame = 6
-frame_progress = 1.0
+frame_progress = 0.4732923
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("2_bjoob")
 
 [node name="HealthComponent" type="Node" parent="."]
