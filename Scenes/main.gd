@@ -68,6 +68,8 @@ func changeStage(nextStage: PackedScene) -> void:
 	if not player_node == null:
 		player_node.PlayerDeath.connect(_on_player_death)
 	
+	show_ui()
+	
 	stageChanged.emit(currentStage)
 
 func show_ui() -> void:
@@ -86,7 +88,6 @@ func get_player_node() -> Player:
 
 func _on_menus_game_start() -> void:
 	loadNextStage()
-	show_ui()
 
 func _on_stage_complete() -> void:
 	loadNextStage()
@@ -96,3 +97,8 @@ func _on_menu_game_quit() -> void:
 
 func _on_player_death() -> void:
 	player_died.emit()
+
+
+func _on_menus_debug() -> void:
+	var loaded_scene = load("res://Scenes/Stages/debug stage.tscn")
+	changeStage(loaded_scene)	

@@ -35,6 +35,7 @@ process_mode = 3
 [connection signal="player_died" from="." to="Menus" method="_on_main_player_died"]
 [connection signal="score_updated" from="." to="GameUI" method="_on_main_score_updated"]
 [connection signal="stageChanged" from="." to="GameUI" method="_on_main_stage_changed"]
+[connection signal="debug" from="Menus" to="." method="_on_menus_debug"]
 [connection signal="gameQuit" from="Menus" to="." method="_on_menu_game_quit"]
 [connection signal="gameStart" from="Menus" to="." method="_on_menus_game_start"]
 [connection signal="stageRestart" from="Menus" to="." method="restartStage"]

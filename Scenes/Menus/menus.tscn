@@ -63,6 +63,7 @@ state_name = "paused"
 metadata/_custom_type_script = "uid://xmr3p4wrraye"
 
 [connection signal="exitGame" from="MainMenu" to="." method="_onExitGame"]
+[connection signal="startDebug" from="MainMenu" to="." method="_on_main_menu_start_debug"]
 [connection signal="startGame" from="MainMenu" to="StateMachine/MainMenu" method="_on_main_menu_start_game"]
 [connection signal="ExitGame" from="GameOver" to="." method="_onExitGame"]
 [connection signal="RestartStage" from="GameOver" to="." method="_on_game_over_restart_stage"]
